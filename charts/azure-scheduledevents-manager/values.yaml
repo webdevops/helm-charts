@@ -1,0 +1,192 @@
+# -- String to partially override fullname template (will maintain the release name)
+nameOverride: ""
+
+# -- String to fully override fullname template
+fullnameOverride: ""
+
+namespaceOverride: ""
+
+image:
+  registry: docker.io
+  repository: webdevops/azure-scheduledevents-manager
+  tag: "22.9.0-kubernetes"
+  pullPolicy: IfNotPresent
+
+env: {}
+  # - name: DEBUG
+  #   value: "true"
+  # - name: VERBOSE
+  #   value: "true"
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 150Mi
+  requests:
+    cpu: 25m
+    memory: 150Mi
+
+nodeSelector:
+  kubernetes.io/os: linux
+
+terminationGracePeriodSeconds: 600
+
+affinity: {}
+
+tolerations:
+  - key: "node-role.kubernetes.io/master"
+    effect: "NoSchedule"
+    operator: "Exists"
+
+restartPolicy: Always
+priorityClassName: system-node-critical
+
+startupProbe:
+  tcpSocket:
+    port: http-metrics
+  initialDelaySeconds: 15
+  periodSeconds: 10
+  failureThreshold: 5
+livenessProbe:
+  tcpSocket:
+    port: http-metrics
+  initialDelaySeconds: 15
+  periodSeconds: 30
+  failureThreshold: 5
+readinessProbe:
+  tcpSocket:
+    port: http-metrics
+  initialDelaySeconds: 15
+  periodSeconds: 30
+  failureThreshold: 5
+
+serviceAccount:
+  name: azure-scheduledevents-manager
+  labels: {}
+  annotations: {}
+
+## Customize the updateStrategy if set
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 1
+
+podLabels: {}
+podAnnotations: {}
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  supplementalGroups: [1000]
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+containerSecurityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  capabilities:
+    drop: ["ALL"]
+
+# -- registry secret names as an array
+imagePullSecrets: []
+
+scheduledEvent:
+  approve: true
+  notification: ""
+  scrapeTime: "30s"
+  drain:
+    enable: true
+    notBefore: "12m"
+    kubeDrainArgs: "--force --grace-period=600 --timeout=0s --delete-emptydir-data=true --ignore-daemonsets=true"
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  appProtocol: http
+  nodePort:
+  portName: http-metrics
+  annotations: {}
+  labels: {}
+
+netpol:
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: []
+  egress:
+    # DNS
+    - ports:
+      - port: 53
+        protocol: TCP
+    - ports:
+      - port: 53
+        protocol: UDP
+    # HTTPS (Kubernetes apiserver)
+    - ports:
+      - port: 443
+        protocol: TCP
+    # HTTP (instance metadata, via aad-pod-identity proxy)
+    - ports:
+      - port: 2579
+        protocol: TCP
+      to:
+      - ipBlock:
+          cidr: 127.0.0.1/32
+    # HTTP (instance metadata)
+    - ports:
+      - port: 80
+        protocol: TCP
+      to:
+      - ipBlock:
+          cidr: 169.254.169.254/32
+
+rbac:
+  enabled: true
+
+prometheus:
+  rule:
+    enabled: false
+  monitor:
+    enabled: false
+
+    jobLabel: ""
+
+    scheme: http
+    basicAuth: {}
+    bearerTokenFile:
+    tlsConfig: {}
+
+    ## proxyUrl: URL of a proxy that should be used for scraping.
+    ##
+    proxyUrl: ""
+
+    relabelings: []
+    metricRelabelings: []
+    interval: ""
+    scrapeTimeout: ""
+
+    ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
+    ##
+    sampleLimit: 0
+
+    ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
+    ##
+    targetLimit: 0
+
+    ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelLimit: 0
+
+    ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelNameLengthLimit: 0
+
+    ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelValueLengthLimit: 0
+
+global:
+  imagePullSecrets: []

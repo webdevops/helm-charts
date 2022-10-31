@@ -1,0 +1,59 @@
+{{- if .Values.rbac.enabled }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ template "kube-pool-manager.fullname" . }}
+  labels: {{ include "kube-pool-manager.labels" . | indent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs:     ["get", "list", "patch", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ template "kube-pool-manager.fullname" . }}
+  namespace: {{ template "kube-pool-manager.namespace" . }}
+  labels: {{ include "kube-pool-manager.labels" . | indent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["create"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["kube-pool-manager-leader"]
+    verbs: ["get", "watch", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs:     ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "kube-pool-manager.fullname" . }}
+  labels: {{ include "kube-pool-manager.labels" . | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ template "kube-pool-manager.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ .Values.serviceAccount.name | quote }}
+    namespace: {{ template "kube-pool-manager.namespace" . }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ template "kube-pool-manager.fullname" . }}
+  namespace: {{ template "kube-pool-manager.namespace" . }}
+  labels: {{ include "kube-pool-manager.labels" . | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ template "kube-pool-manager.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    namespace: {{ template "kube-pool-manager.namespace" . }}
+    name: {{ .Values.serviceAccount.name | quote }}
+{{- end }}

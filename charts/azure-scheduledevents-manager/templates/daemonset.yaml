@@ -1,0 +1,88 @@
+{{- $secretHash := include (print $.Template.BasePath "/secret.yaml") . | sha256sum -}}
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ template "azure-scheduledevents-manager.fullname" . }}
+  namespace: {{ template "azure-scheduledevents-manager.namespace" . }}
+  labels: {{ include "azure-scheduledevents-manager.labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "azure-scheduledevents-manager.selectorLabels" . | nindent 6 }}
+
+  {{- with .Values.updateStrategy }}
+  updateStrategy: {{ toYaml . | nindent 4 }}
+  {{- end }}
+
+  template:
+    metadata:
+      labels:
+{{ include "azure-scheduledevents-manager.labels" . | indent 8 }}
+{{- with .Values.podLabels }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+      annotations:
+        checksum/secret: {{ $secretHash }}
+{{- with .Values.podAnnotations }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name | quote }}
+      priorityClassName: {{ .Values.priorityClassName | quote }}
+
+      securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
+
+      restartPolicy: {{ .Values.restartPolicy | quote }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+        - name: azure-scheduledevents-manager
+          image: {{ include "azure-scheduledevents-manager.image" . | quote }}
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+          securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
+          env:
+{{ if .Values.scheduledEvent.notification }}
+            - name: NOTIFICATION
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "azure-scheduledevents-manager.fullname" . }}
+                  key: "notification"
+{{ end }}
+            - name: SCRAPE_TIME
+              value: {{ .Values.scheduledEvent.scrapeTime | quote }}
+            - name: AZURE_APPROVE_SCHEDULEDEVENT
+              value: {{ printf "%t" .Values.scheduledEvent.approve | quote }}
+            - name: DRAIN_ENABLE
+              value: {{ printf "%t" .Values.scheduledEvent.drain.enable | quote }}
+            - name: DRAIN_MODE
+              value: "kubernetes"
+            - name: DRAIN_NOT_BEFORE
+              value: {{ .Values.scheduledEvent.drain.notBefore | quote }}
+            - name: KUBE_DRAIN_ARGS
+              value: {{ .Values.scheduledEvent.drain.kubeDrainArgs | quote }}
+            - name: KUBE_NODENAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: AZURE_ERROR_THRESHOLD
+              value: "10"
+{{ with .Values.env }}
+{{ toYaml . | nindent 12 }}
+{{end}}
+          ports:
+            - containerPort: 8080
+              name: http-metrics
+              protocol: TCP
+          resources: {{ toYaml .Values.resources | nindent 12 }}
+          startupProbe: {{ toYaml .Values.startupProbe | nindent 12 }}
+          livenessProbe: {{ toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe: {{ toYaml .Values.readinessProbe | nindent 12 }}
+
+{{- with .Values.nodeSelector }}
+      nodeSelector: {{ toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.affinity }}
+      affinity: {{ toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations: {{ toYaml . | nindent 8 }}
+{{- end }}

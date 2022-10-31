@@ -1,0 +1,16 @@
+apiVersion: v2
+name: azure-scheduledevents-manager
+description: A Helm chart for azure-scheduledevents-manager
+keywords:
+  - azure-scheduledevents-manager
+  - azure
+  - exporter
+type: application
+version: 1.0.0
+appVersion: 22.9.0
+home: https://github.com/webdevops/azure-scheduledevents-manager
+sources:
+  - https://github.com/prometheus/node_exporter/
+maintainers:
+  - email: mblaschke82@gmail.com
+    name: mblaschke

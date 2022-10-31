@@ -1,0 +1,46 @@
+{{- if .Values.prometheus.rule.enabled }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ template "azure-scheduledevents-manager.fullname" . }}
+  namespace: {{ template "azure-scheduledevents-manager.namespace" . }}
+  labels: {{ include "azure-scheduledevents-manager.labels" . | indent 4 }}
+spec:
+  groups:
+    - name: azureScheduledEvents
+      rules:
+        - alert: azureScheduledEventsUpcomingEarly
+          expr: |-
+            min by (eventID,eventStatus,eventType,notBefore,resource,resourceType) (
+              azure_scheduledevent_event{namespace="{{ template "azure-scheduledevents-manager.namespace" . }}"}
+            ) - time() > (1 * 60 * 60)
+          for: 1m
+          labels:
+            severity: info
+          annotations:
+            summary: "upcoming Azure ScheduledEvents."
+            description: {{ `Resource {{ $labels.resource }} for {{ $labels.eventType }} not before {{ $labels.notBefore }} (in {{ $value | humanizeDuration }}).` | quote }}
+        - alert: azureScheduledEventsUpcoming
+          expr: |-
+            min by (eventID,eventStatus,eventType,notBefore,resource,resourceType) (
+              azure_scheduledevent_event{namespace="{{ template "azure-scheduledevents-manager.namespace" . }}"}
+            ) - time() > 1 < (1 * 60 * 60)
+          for: 1m
+          labels:
+            severity: info
+          annotations:
+            summary: "upcoming Azure ScheduledEvents."
+            description: {{ `Resource {{ $labels.resource }} for {{ $labels.eventType }} not before {{ $labels.notBefore }} (in {{ $value | humanizeDuration }}).` | quote }}
+        - alert: azureScheduledEventsActive
+          expr: |-
+            min by (eventID,eventStatus,eventType,notBefore,resource,resourceType) (
+              azure_scheduledevent_event{namespace="{{ template "azure-scheduledevents-manager.namespace" . }}"}
+            ) - time() == 1
+          for: 1m
+          labels:
+            severity: info
+          annotations:
+            summary: "active Azure ScheduledEvents."
+            description: {{ `ScheduledEvents {{ $labels.eventType }} for {{ $labels.resource }} is active` | quote }}
+{{- end }}

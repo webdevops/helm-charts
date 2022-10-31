@@ -1,0 +1,14 @@
+apiVersion: v2
+name: kube-pool-manager
+description: A Helm chart for kube-pool-manager
+keywords:
+  - kube-pool-manager
+type: application
+version: 1.0.0
+appVersion: 22.9.0
+home: https://github.com/webdevops/kube-pool-manager
+sources:
+  - https://github.com/prometheus/node_exporter/
+maintainers:
+  - email: mblaschke82@gmail.com
+    name: mblaschke
