@@ -17,10 +17,10 @@ minReadySeconds: 10
 terminationGracePeriodSeconds: 60
 
 env: {}
-  # - name: DEBUG
-  #   value: "true"
-  # - name: VERBOSE
-  #   value: "true"
+#   - name: DEBUG
+#     value: "true"
+#   - name: VERBOSE
+#     value: "true"
 
 resources:
   limits:
@@ -103,6 +103,7 @@ service:
   labels: {}
 
 netpol:
+  enabled: true
   policyTypes:
     - Ingress
     - Egress

@@ -7,7 +7,11 @@ metadata:
   namespace: {{ template "kube-pool-manager.namespace" . }}
   labels: {{ include "kube-pool-manager.labels" . | indent 4 }}
 spec:
-  replicas: {{ .Values.replicas }}
+
+  {{- with .Values.replicas }}
+  replicas: {{ . }}
+  {{- end }}
+
   {{- with .Values.strategy }}
   strategy: {{ toYaml . | nindent 4 }}
   {{- end }}
@@ -63,34 +67,42 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
 
-{{ with .Values.env }}
-{{ toYaml . | nindent 12 }}
-{{end}}
+          {{- with .Values.env }}
+          {{ toYaml . | nindent 12 }}
+          {{- end}}
 
           ports:
             - containerPort: 8080
               name: http-metrics
               protocol: TCP
 
-          resources: {{ toYaml .Values.resources | nindent 12 }}
-          startupProbe: {{ toYaml .Values.startupProbe | nindent 12 }}
-          livenessProbe: {{ toYaml .Values.livenessProbe | nindent 12 }}
-          readinessProbe: {{ toYaml .Values.readinessProbe | nindent 12 }}
+          {{- with .Values.resources }}
+          resources: {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.startupProbe }}
+          startupProbe: {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe: {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe: {{ toYaml . | nindent 12 }}
+          {{- end }}
 
           volumeMounts:
             - name: config
               mountPath: /app
               readOnly: true
 
-{{- with .Values.nodeSelector }}
+      {{- with .Values.nodeSelector }}
       nodeSelector: {{ toYaml . | nindent 8 }}
-{{- end }}
-{{- with .Values.affinity }}
+      {{- end }}
+      {{- with .Values.affinity }}
       affinity: {{ toYaml . | nindent 8 }}
-{{- end }}
-{{- with .Values.tolerations }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations: {{ toYaml . | nindent 8 }}
-{{- end }}
+      {{- end }}
 
       volumes:
         - name: config
