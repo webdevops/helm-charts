@@ -1,6 +1,45 @@
 apiVersion: v1
 entries:
+  azure-janitor:
+  - apiVersion: v2
+    appVersion: 22.9.0
+    created: "2022-11-02T19:50:56.576650585Z"
+    description: A Helm chart for azure-janitor
+    digest: 00254e97d7983df90970fa44b26aeebcc7bc789ac1394444328c9fd5d32a58c0
+    home: https://github.com/webdevops/azure-janitor
+    keywords:
+    - azure-janitor
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-janitor
+    sources:
+    - https://github.com/prometheus/node_exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-janitor-1.0.0/azure-janitor-1.0.0.tgz
+    version: 1.0.0
   azure-scheduledevents-manager:
+  - apiVersion: v2
+    appVersion: 22.9.0
+    created: "2022-11-02T19:50:56.816215453Z"
+    description: A Helm chart for azure-scheduledevents-manager
+    digest: e3fa9ab4437c85b12648a65f9108c34916b6174e1e1447e4120e9470b8e71bbb
+    home: https://github.com/webdevops/azure-scheduledevents-manager
+    keywords:
+    - azure-scheduledevents-manager
+    - azure
+    - exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-scheduledevents-manager
+    sources:
+    - https://github.com/prometheus/node_exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-scheduledevents-manager-1.0.3/azure-scheduledevents-manager-1.0.3.tgz
+    version: 1.0.3
   - apiVersion: v2
     appVersion: 22.9.0
     created: "2022-10-31T19:04:25.393680911Z"
@@ -24,6 +63,24 @@ entries:
   kube-pool-manager:
   - apiVersion: v2
     appVersion: 22.9.0
+    created: "2022-11-02T19:50:57.049019057Z"
+    description: A Helm chart for kube-pool-manager
+    digest: 0cc0201ce684499d00630b86fb45f197593df85428bdbff0341be095309eabf1
+    home: https://github.com/webdevops/kube-pool-manager
+    keywords:
+    - kube-pool-manager
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: kube-pool-manager
+    sources:
+    - https://github.com/prometheus/node_exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/kube-pool-manager-1.0.3/kube-pool-manager-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 22.9.0
     created: "2022-10-31T19:04:25.524235553Z"
     description: A Helm chart for kube-pool-manager
     digest: 2eed30960e1defc81f8952d82b59b0896293d7a8eafa89fdb4bcbb3e0946afba
@@ -40,4 +97,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/kube-pool-manager-1.0.2/kube-pool-manager-1.0.2.tgz
     version: 1.0.2
-generated: "2022-10-31T19:04:25.524240553Z"
+generated: "2022-11-02T19:50:57.049031257Z"
