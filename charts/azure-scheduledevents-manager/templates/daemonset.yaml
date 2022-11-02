@@ -40,13 +40,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
           env:
-{{ if .Values.scheduledEvent.notification }}
-            - name: NOTIFICATION
+            {{- range $index, $val := .Values.secrets }}
+            - name: {{ $index | quote }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "azure-scheduledevents-manager.fullname" . }}
-                  key: "notification"
-{{ end }}
+                  name: {{ template "azure-janitor.fullname" . }}
+                  key: {{ $index | quote }}
+            {{- end }}
             - name: SCRAPE_TIME
               value: {{ .Values.scheduledEvent.scrapeTime | quote }}
             - name: AZURE_APPROVE_SCHEDULEDEVENT
@@ -65,24 +65,34 @@ spec:
                   fieldPath: spec.nodeName
             - name: AZURE_ERROR_THRESHOLD
               value: "10"
-{{ with .Values.env }}
-{{ toYaml . | nindent 12 }}
-{{end}}
+            {{- with .Values.env }}
+            {{ toYaml . | nindent 12 }}
+            {{- end}}
+
           ports:
             - containerPort: 8080
               name: http-metrics
               protocol: TCP
-          resources: {{ toYaml .Values.resources | nindent 12 }}
-          startupProbe: {{ toYaml .Values.startupProbe | nindent 12 }}
-          livenessProbe: {{ toYaml .Values.livenessProbe | nindent 12 }}
-          readinessProbe: {{ toYaml .Values.readinessProbe | nindent 12 }}
 
-{{- with .Values.nodeSelector }}
+          {{- with .Values.resources }}
+          resources: {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.startupProbe }}
+          startupProbe: {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe: {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe: {{ toYaml . | nindent 12 }}
+          {{- end }}
+
+      {{- with .Values.nodeSelector }}
       nodeSelector: {{ toYaml . | nindent 8 }}
-{{- end }}
-{{- with .Values.affinity }}
+      {{- end }}
+      {{- with .Values.affinity }}
       affinity: {{ toYaml . | nindent 8 }}
-{{- end }}
-{{- with .Values.tolerations }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations: {{ toYaml . | nindent 8 }}
-{{- end }}
+      {{- end }}

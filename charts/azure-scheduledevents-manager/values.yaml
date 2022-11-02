@@ -12,11 +12,14 @@ image:
   tag: "22.9.0-kubernetes"
   pullPolicy: IfNotPresent
 
-env: {}
+env: []
   # - name: DEBUG
   #   value: "true"
   # - name: VERBOSE
   #   value: "true"
+
+secrets: {}
+  # secretName: secretValue
 
 resources:
   limits:
@@ -94,7 +97,6 @@ imagePullSecrets: []
 
 scheduledEvent:
   approve: true
-  notification: ""
   scrapeTime: "30s"
   drain:
     enable: true
@@ -112,6 +114,7 @@ service:
   labels: {}
 
 netpol:
+  enabled: true
   policyTypes:
     - Ingress
     - Egress

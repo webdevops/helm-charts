@@ -6,7 +6,7 @@ keywords:
   - azure
   - exporter
 type: application
-version: 1.0.2
+version: 1.0.3
 appVersion: 22.9.0
 home: https://github.com/webdevops/azure-scheduledevents-manager
 sources:
