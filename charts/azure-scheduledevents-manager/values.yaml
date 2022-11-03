@@ -9,7 +9,8 @@ namespaceOverride: ""
 image:
   registry: docker.io
   repository: webdevops/azure-scheduledevents-manager
-  tag: "22.9.0-kubernetes"
+  tag: ""
+  tagFlavor: "-kubernetes"
   pullPolicy: IfNotPresent
 
 env: []

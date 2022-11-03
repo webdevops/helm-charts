@@ -71,9 +71,9 @@ The image to use
 */}}
 {{- define "azure-scheduledevents-manager.image" -}}
 {{- if .Values.image.sha -}}
-{{- printf "%s/%s:%s@%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag) .Values.image.sha }}
+{{- printf "%s/%s:%s%s@%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag .Values.image.tagFlavor) .Values.image.sha }}
 {{- else -}}
-{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag) }}
+{{- printf "%s/%s:%s%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag) .Values.image.tagFlavor }}
 {{- end }}
 {{- end }}
 
