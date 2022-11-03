@@ -1,0 +1,15 @@
+apiVersion: v2
+name: azure-resourcemanager-exporter
+type: application
+description: A Helm chart for azure-resourcemanager-exporter
+home: https://github.com/webdevops/azure-resourcemanager-exporter
+version: 1.0.0
+appVersion: 22.9.1
+keywords:
+- azure-resourcemanager-exporter
+maintainers:
+- email: mblaschke82@gmail.com
+  name: mblaschke
+sources:
+- https://github.com/prometheus/node_exporter/
+
