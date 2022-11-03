@@ -17,10 +17,13 @@ minReadySeconds: 10
 terminationGracePeriodSeconds: 60
 
 env: {}
-#   - name: DEBUG
-#     value: "true"
-#   - name: VERBOSE
-#     value: "true"
+  # - name: DEBUG
+  #   value: "true"
+  # - name: VERBOSE
+  #   value: "true"
+
+secrets: {}
+  # secretName: secretValue
 
 resources:
   limits:
