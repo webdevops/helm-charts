@@ -9,7 +9,7 @@ namespaceOverride: ""
 image:
   registry: docker.io
   repository: webdevops/azure-janitor
-  tag: "22.9.0"
+  tag: ""
   pullPolicy: IfNotPresent
 
 replicas: 1
