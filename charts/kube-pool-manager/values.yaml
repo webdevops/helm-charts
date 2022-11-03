@@ -9,7 +9,7 @@ namespaceOverride: ""
 image:
   registry: docker.io
   repository: webdevops/kube-pool-manager
-  tag: "22.9.0"
+  tag: ""
   pullPolicy: IfNotPresent
 
 replicas: 2
@@ -34,7 +34,7 @@ nodeSelector:
   kubernetes.io/os: linux
 
 affinity: {}
-tolerations: {}
+tolerations: []
 
 restartPolicy: Always
 priorityClassName: ""
