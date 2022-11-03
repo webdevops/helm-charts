@@ -11,5 +11,5 @@ maintainers:
 - email: mblaschke82@gmail.com
   name: mblaschke
 sources:
-- https://github.com/prometheus/node_exporter/
+- https://github.com/webdevops/azure-janitor/
 

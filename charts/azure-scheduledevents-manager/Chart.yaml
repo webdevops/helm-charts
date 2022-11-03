@@ -10,7 +10,7 @@ version: 1.0.5
 appVersion: 22.9.0
 home: https://github.com/webdevops/azure-scheduledevents-manager
 sources:
-  - https://github.com/prometheus/node_exporter/
+  - https://github.com/webdevops/azure-scheduledevents-manager/
 maintainers:
   - email: mblaschke82@gmail.com
     name: mblaschke
