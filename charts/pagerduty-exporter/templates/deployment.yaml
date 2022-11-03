@@ -1,0 +1,89 @@
+{{- $secretHash := include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "pagerduty-exporter.fullname" . }}
+  namespace: {{ template "pagerduty-exporter.namespace" . }}
+  labels: {{ include "pagerduty-exporter.labels" . | indent 4 }}
+spec:
+  {{- with .Values.replicas }}
+  replicas: {{ . }}
+  {{- end }}
+  {{- with .Values.strategy }}
+  strategy: {{ toYaml . | nindent 4 }}
+  {{- end }}
+
+  selector:
+    matchLabels: {{- include "pagerduty-exporter.selectorLabels" . | nindent 6 }}
+
+  minReadySeconds: {{ .minReadySeconds }}
+  template:
+    metadata:
+      labels:
+{{ include "pagerduty-exporter.labels" . | indent 8 }}
+{{- with .Values.podLabels }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+      annotations:
+        checksum/secret: {{ $secretHash | quote }}
+{{- with .Values.podAnnotations }}
+{{ toYaml . | indent 8 }}
+{{- end }}
+
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name | quote }}
+      priorityClassName: {{ .Values.priorityClassName | quote }}
+
+      securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+
+      containers:
+        #######################
+        # Kube pool manager
+        #######################
+        - name: pagerduty-exporter
+          image: {{ include "pagerduty-exporter.image" . | quote }}
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+
+          securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
+
+          env:
+{{- range $index, $val := .Values.secrets }}
+          - name: {{ $index | quote }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "pagerduty-exporter.fullname" . }}
+                key: {{ $index | quote }}
+{{- end }}
+{{ with .Values.env }}
+{{ toYaml . | nindent 12 }}
+{{end}}
+
+          ports:
+            - containerPort: 8080
+              name: http-metrics
+              protocol: TCP
+
+{{- with .Values.resources }}
+          resources: {{ toYaml . | nindent 12 }}
+{{- end }}
+{{- with .Values.startupProbe }}
+          startupProbe: {{ toYaml . | nindent 12 }}
+{{- end }}
+{{- with .Values.livenessProbe }}
+          livenessProbe: {{ toYaml . | nindent 12 }}
+{{- end }}
+{{- with .Values.readinessProbe }}
+          readinessProbe: {{ toYaml . | nindent 12 }}
+{{- end }}
+
+{{- with .Values.nodeSelector }}
+      nodeSelector: {{ toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.affinity }}
+      affinity: {{ toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations: {{ toYaml . | nindent 8 }}
+{{- end }}

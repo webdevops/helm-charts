@@ -1,0 +1,15 @@
+{{- if .Values.netpol.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ template "pagerduty-exporter.fullname" . }}
+  namespace: {{ template "pagerduty-exporter.namespace" . }}
+  labels: {{ include "pagerduty-exporter.labels" . | indent 4 }}
+spec:
+  podSelector:
+    matchLabels: {{- include "pagerduty-exporter.selectorLabels" . | nindent 6 }}
+  policyTypes: {{ toYaml .Values.netpol.policyTypes | nindent 4 }}
+  ingress: {{ toYaml .Values.netpol.ingress | nindent 4 }}
+  egress: {{ toYaml .Values.netpol.egress | nindent 4 }}
+{{- end }}
