@@ -9,6 +9,18 @@
 helm repo add webdevops https://webdevops.github.io/helm-charts/
 ```
 
+or in `Chart.yaml`:
+```yaml
+apiVersion: v2
+name: foobar
+description: example chart
+# ...
+dependencies:
+  - name: xxxxx
+    version: 1.x.x
+    repository: "https://webdevops.github.io/helm-charts/"
+```
+
 
 ## helm-azure-tpl (injecting Azure KeyVault secrets in helm charts)
 
