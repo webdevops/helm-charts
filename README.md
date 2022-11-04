@@ -21,6 +21,15 @@ dependencies:
     repository: "https://webdevops.github.io/helm-charts/"
 ```
 
+## charts
+
+| Chart                                                                     | Description                                                                                                                                                                              | Project                                                                                                                                                   |
+|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [azure-janitor](./charts/azure-janitor)                                   | Automated removal of Azure resources based on ttl tag                                                                                                                                    | [![](https://img.shields.io/badge/github-webdevops%2Fazure--janitor-blue)](https://github.com/webdevops/azure-janitor)                                    |
+| [azure-resourcemanager-exporter](./charts/azure-resourcemanager-exporter) | Prometheus exporter for Azure ResourceManager information                                                                                                                                | [![](https://img.shields.io/badge/github-webdevops%2Fazure--resourcemanager--exporter-blue)](https://github.com/webdevops/azure-resourcemanager-exporter) |
+| [azure-scheduledevents-manager](./charts/azure-scheduledevents-manager)   | Manages [Azure ScheduledEvents](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/scheduled-events) (drain nodes) and provides metrics for upcoming Azure ScheduledEvents | [![](https://img.shields.io/badge/github-webdevops%2Fazure--scheduledevents--manager-blue)](https://github.com/webdevops/azure-scheduledevents-manager)   |
+| [kube-pool-manager](./charts/kube-pool-manager)                           | Manages Kubernetes pool nodes (adds labels, annotations, ...) based on node spec                                                                                                         | [![](https://img.shields.io/badge/github-webdevops%2Fkube--pool--manager-blue)](https://github.com/webdevops/kube-pool-manager)                           |
+| [pagerduty-exporter](./charts/pagerduty-exporter)                         | Prometheus exporter for PagerDuty accounts                                                                                                                                               | [![](https://img.shields.io/badge/github-webdevops%2Fpagerduty--exporter-blue)](https://github.com/webdevops/pagerduty-exporter)                          |
 
 ## helm-azure-tpl (injecting Azure KeyVault secrets in helm charts)
 
