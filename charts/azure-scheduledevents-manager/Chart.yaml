@@ -1,16 +1,14 @@
 apiVersion: v2
 name: azure-scheduledevents-manager
+type: application
 description: A Helm chart for azure-scheduledevents-manager
+home: https://github.com/webdevops/azure-scheduledevents-manager
+version: 1.0.6
+appVersion: 22.9.0
 keywords:
   - azure-scheduledevents-manager
-  - azure
-  - exporter
-type: application
-version: 1.0.5
-appVersion: 22.9.0
-home: https://github.com/webdevops/azure-scheduledevents-manager
-sources:
-  - https://github.com/webdevops/azure-scheduledevents-manager/
 maintainers:
   - email: mblaschke82@gmail.com
     name: mblaschke
+sources:
+  - https://github.com/webdevops/azure-scheduledevents-manager/
