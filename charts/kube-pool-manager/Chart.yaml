@@ -1,14 +1,14 @@
 apiVersion: v2
 name: kube-pool-manager
+type: application
 description: A Helm chart for kube-pool-manager
+home: https://github.com/webdevops/kube-pool-manager
+version: 1.0.6
+appVersion: 22.9.0
 keywords:
   - kube-pool-manager
-type: application
-version: 1.0.5
-appVersion: 22.9.0
-home: https://github.com/webdevops/kube-pool-manager
-sources:
-  - https://github.com/webdevops/kube-pool-manager/
 maintainers:
   - email: mblaschke82@gmail.com
     name: mblaschke
+sources:
+  - https://github.com/webdevops/kube-pool-manager/
