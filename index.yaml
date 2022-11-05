@@ -73,6 +73,25 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/azure-janitor-1.0.0/azure-janitor-1.0.0.tgz
     version: 1.0.0
+  azure-keyvault-exporter:
+  - apiVersion: v2
+    appVersion: 22.9.0
+    created: "2022-11-05T16:33:10.631825121Z"
+    description: A Helm chart for azure-keyvault-exporter
+    digest: be0ca419c61cbd3975dce6e5146fba619d5c6f6d1fd3a1f3b9a4d42f8d2fe3f9
+    home: https://github.com/webdevops/azure-keyvault-exporter
+    keywords:
+    - azure-keyvault-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-keyvault-exporter
+    sources:
+    - https://github.com/webdevops/azure-keyvault-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-keyvault-exporter-1.0.0/azure-keyvault-exporter-1.0.0.tgz
+    version: 1.0.0
   azure-metrics-exporter:
   - apiVersion: v2
     appVersion: 22.9.0
@@ -338,4 +357,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2022-11-05T15:58:50.311290384Z"
+generated: "2022-11-05T16:33:10.631860622Z"
