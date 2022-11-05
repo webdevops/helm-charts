@@ -3,6 +3,10 @@
 [![license](https://img.shields.io/github/license/webdevops/helm-azure-tpl.svg)](https://github.com/webdevops/helm-azure-tpl/blob/master/LICENSE)
 [![Chart Publish](https://github.com/webdevops/helm-charts/actions/workflows/release.yaml/badge.svg)](https://github.com/webdevops/helm-charts/actions/workflows/release.yaml)
 
+> **Note**
+> These helm charts are currently in preview and in development. Please report issues and problem.
+
+
 ## usage
 
 ```shell
