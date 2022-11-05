@@ -1,0 +1,15 @@
+apiVersion: v2
+name: azure-metrics-exporter
+type: application
+description: A Helm chart for azure-metrics-exporter
+home: https://github.com/webdevops/azure-metrics-exporter
+version: 1.0.0
+appVersion: 22.9.0
+keywords:
+- azure-metrics-exporter
+maintainers:
+- email: mblaschke82@gmail.com
+  name: mblaschke
+sources:
+- https://github.com/webdevops/azure-metrics-exporter/
+
