@@ -22,8 +22,9 @@ env: {}
   # - name: VERBOSE
   #   value: "true"
 
+secretsEnableTemplateFunctions: false
 secrets: {}
-  # secretName: secretValue
+# secretName: secretValue
 
 resources:
   limits:

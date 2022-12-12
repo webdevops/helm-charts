@@ -51,7 +51,7 @@ spec:
           - name: {{ $index | quote }}
             valueFrom:
               secretKeyRef:
-                name: {{ template "azure-janitor.fullname" . }}
+                name: {{ template "azure-janitor.fullname" $ }}
                 key: {{ $index | quote }}
 {{- end }}
 {{ with .Values.env }}
