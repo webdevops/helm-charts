@@ -65,10 +65,13 @@ spec:
                   fieldPath: spec.nodeName
             - name: AZURE_ERROR_THRESHOLD
               value: "10"
-            {{- with .Values.env }}
-            {{ toYaml . | nindent 12 }}
-            {{- end}}
-
+          {{- range $name, $value := .Values.env }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- with .Values.extraEnv }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: 8080
               name: http-metrics

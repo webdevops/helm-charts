@@ -1,0 +1,8 @@
+env:
+  DEBUG: "true"
+
+extraEnv:
+  - name: MY_POD_NAMESPACE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.namespace

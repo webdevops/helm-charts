@@ -51,7 +51,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
 
           securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
-
           env:
             - name: CONFIG
               value: /app/config.yaml
@@ -75,10 +74,13 @@ spec:
                   name: {{ template "kube-pool-manager.fullname" $ }}
                   key: {{ $index | quote }}
           {{- end }}
-          {{- with .Values.env }}
-          {{ toYaml . | nindent 12 }}
-          {{- end}}
-
+          {{- range $name, $value := .Values.env }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- with .Values.extraEnv }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: 8080
               name: http-metrics
