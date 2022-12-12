@@ -2,7 +2,9 @@ env:
   CT_BUILD_ID: '${{ github.run_id }}'
 
 name: Chart Testing
-on: [pull_request]
+
+on: [pull_request, workflow_dispatch]
+
 jobs:
   build:
     name: lint, install

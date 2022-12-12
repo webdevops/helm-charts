@@ -1,5 +1,7 @@
 name: Markdown Lint
-on: [pull_request]
+
+on: [pull_request, workflow_dispatch]
+
 jobs:
   lint-changelog:
     name: Lint all markdown files
