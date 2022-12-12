@@ -53,7 +53,7 @@ spec:
           - name: {{ $index | quote }}
             valueFrom:
               secretKeyRef:
-                name: {{ template "azure-keyvault-exporter.fullname" . }}
+                name: {{ template "azure-keyvault-exporter.fullname" $ }}
                 key: {{ $index | quote }}
 {{- end }}
 {{ with .Values.env }}

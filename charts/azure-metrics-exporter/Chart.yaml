@@ -3,7 +3,7 @@ name: azure-metrics-exporter
 type: application
 description: A Helm chart for azure-metrics-exporter
 home: https://github.com/webdevops/azure-metrics-exporter
-version: 1.0.0
+version: 1.0.1
 appVersion: 22.9.0
 keywords:
 - azure-metrics-exporter
@@ -12,4 +12,3 @@ maintainers:
   name: mblaschke
 sources:
 - https://github.com/webdevops/azure-metrics-exporter/
-
