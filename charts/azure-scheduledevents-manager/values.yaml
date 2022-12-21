@@ -14,10 +14,8 @@ image:
   pullPolicy: IfNotPresent
 
 env: []
-  # - name: DEBUG
-  #   value: "true"
-  # - name: VERBOSE
-  #   value: "true"
+  # DEBUG: "true"
+  # VERBOSE: "true"
 
 secretsEnableTemplateFunctions: false
 secrets: {}

@@ -17,10 +17,15 @@ minReadySeconds: 10
 terminationGracePeriodSeconds: 60
 
 env: {}
-  # - name: DEBUG
-  #   value: "true"
-  # - name: VERBOSE
-  #   value: "true"
+  # DEBUG: "true"
+  # VERBOSE: "true"
+
+extraEnv: []
+  # - name: REDIS_PASSWORD
+  #   valueFrom:
+  #     secretKeyRef:
+  #       key: redis-password
+  #       name: redis-config-0.0.2
 
 secretsEnableTemplateFunctions: false
 secrets: {}

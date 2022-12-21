@@ -47,19 +47,21 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
 
           securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
-
           env:
-{{- range $index, $val := .Values.secrets }}
-          - name: {{ $index | quote }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ template "azure-keyvault-exporter.fullname" $ }}
-                key: {{ $index | quote }}
-{{- end }}
-{{ with .Values.env }}
-{{ toYaml . | nindent 12 }}
-{{end}}
-
+          {{- range $index, $val := .Values.secrets }}
+            - name: {{ $index | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "azure-keyvault-exporter.fullname" $ }}
+                  key: {{ $index | quote }}
+          {{- end }}
+          {{- range $name, $value := .Values.env }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- with .Values.extraEnv }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: 8080
               name: http-metrics
