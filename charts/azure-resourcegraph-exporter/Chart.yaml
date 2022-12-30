@@ -1,0 +1,14 @@
+apiVersion: v2
+name: azure-resourcegraph-exporter
+type: application
+description: A Helm chart for azure-resourcegraph-exporter
+home: https://github.com/webdevops/azure-resourcegraph-exporter
+version: 1.0.0
+appVersion: 22.9.0
+keywords:
+- azure-resourcegraph-exporter
+maintainers:
+- email: mblaschke82@gmail.com
+  name: mblaschke
+sources:
+- https://github.com/webdevops/azure-resourcegraph-exporter/
