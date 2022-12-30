@@ -1,0 +1,15 @@
+{{- if not .Values.config.existingConfigMap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "azure-resourcegraph-exporter.fullname" . }}
+  labels:
+    {{- include "azure-resourcegraph-exporter.labels" . | nindent 4 }}
+data:
+  config.yaml: |-
+    queries:
+    {{- range $name, $query := .Values.config.queries }}
+      -
+        {{- toYaml $query | nindent 8 }}
+    {{- end }}
+{{- end }}
