@@ -1,0 +1,28 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ template "azure-resourcegraph-exporter.fullname" . }}
+  namespace: {{ template "azure-resourcegraph-exporter.namespace" . }}
+  labels:
+    {{- include "azure-resourcegraph-exporter.labels" . | nindent 4 }}
+    {{- if .Values.service.labels }}
+    {{- toYaml .Values.service.labels | nindent 4 }}
+    {{- end }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+    {{- if ( and (eq .Values.service.type "NodePort" ) (not (empty .Values.service.nodePort)) ) }}
+      nodePort: {{ .Values.service.nodePort }}
+    {{- end }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: {{ .Values.service.portName }}
+      appProtocol: http
+  selector:
+    {{- include "azure-resourcegraph-exporter.selectorLabels" . | nindent 4 }}
