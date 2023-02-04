@@ -1,0 +1,110 @@
+{{- $configHash := include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+{{- $secretHash := include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "azure-loganalytics-exporter.fullname" . }}
+  namespace: {{ template "azure-loganalytics-exporter.namespace" . }}
+  labels:
+    {{- include "azure-loganalytics-exporter.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.replicas }}
+  replicas: {{ . }}
+  {{- end }}
+  {{- with .Values.strategy }}
+  strategy: {{ toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.minReadySeconds }}
+  minReadySeconds: {{ . }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "azure-loganalytics-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "azure-loganalytics-exporter.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      annotations:
+        checksum/config: {{ $configHash | quote }}
+        checksum/secret: {{ $secretHash | quote }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ template "azure-loganalytics-exporter.serviceAccountName" . }}
+      {{- with .Values.priorityClassName }}
+      priorityClassName: {{ . | quote }}
+      {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      containers:
+        - name: azure-loganalytics-exporter
+          image: {{ include "azure-loganalytics-exporter.image" . | quote }}
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+          env:
+          {{- range $index, $val := .Values.secrets }}
+            - name: {{ $index | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "azure-loganalytics-exporter.fullname" $ }}
+                  key: {{ $index | quote }}
+          {{- end }}
+          {{- range $name, $value := .Values.env }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- with .Values.extraEnv }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+          {{- end }}
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.startupProbe }}
+          startupProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - mountPath: /config/
+              name: config
+          {{- with .Values.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.config.existingConfigMap | default (include "azure-loganalytics-exporter.fullname" .) }}
+      {{- with .Values.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

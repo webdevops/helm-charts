@@ -1,0 +1,17 @@
+{{- if .Values.netpol.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ template "azure-loganalytics-exporter.fullname" . }}
+  namespace: {{ template "azure-loganalytics-exporter.namespace" . }}
+  labels:
+    {{- include "azure-loganalytics-exporter.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "azure-loganalytics-exporter.selectorLabels" . | nindent 6 }}
+  policyTypes: {{ toYaml .Values.netpol.policyTypes | nindent 4 }}
+  ingress: {{ toYaml .Values.netpol.ingress | nindent 4 }}
+  egress: {{ toYaml .Values.netpol.egress | nindent 4 }}
+{{- end }}

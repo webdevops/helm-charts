@@ -1,0 +1,252 @@
+---
+global:
+  # -- registry secret names as an array
+  imagePullSecrets: []
+
+# -- String to partially override azure-loganalytics-exporter.fullname template (will maintain the release name)
+nameOverride: ''
+
+# -- Allow to override the release namespace
+namespaceOverride: ''
+
+# -- String to fully override azure-loganalytics-exporter.fullname template
+fullnameOverride: ''
+
+# -- Number of amazon-eks-pod-identity-webhook replicas to deploy
+replicas: 1
+
+image:
+  # -- image registry
+  registry: docker.io
+  # -- image repository
+  repository: webdevops/azure-loganalytics-exporter
+  # -- image tag (immutable tags are recommended).
+  # @default -- `.Chart.AppVersion`
+  tag: ""
+  pullPolicy: IfNotPresent
+
+minReadySeconds: 10
+terminationGracePeriodSeconds: 60
+
+# -- define env
+env:
+  CONFIG: /config/config.yaml
+  # LOG_DEBUG: "true"
+  # LOG_JSON: "true"
+
+# -- Array with extra environment variables to add to all the pods
+extraEnv: []
+  # - name: REDIS_PASSWORD
+  #   valueFrom:
+  #     secretKeyRef:
+  #       key: redis-password
+  #       name: redis-config-0.0.2
+
+secrets: {}
+  # secretName: secretValue
+
+# -- Render all secrets values though helm tpl function
+secretsEnableTemplateFunctions: false
+
+resources:
+  # -- The resources limits for the container
+  limits:
+    memory: 200Mi
+  # -- The resources requests for the container
+  requests:
+    cpu: 100m
+    memory: 200Mi
+
+# -- Node labels for pod assignment.
+nodeSelector:
+  kubernetes.io/os: linux
+
+# -- Affinity for pod assignment
+affinity: {}
+
+# -- Tolerations for pod assignment.
+tolerations: []
+
+restartPolicy: Always
+priorityClassName: ""
+
+config:
+  # -- Name of existing configmap
+  existingConfigMap: ""
+  # -- Configuration of queries
+  queries: {}
+    # azure_metrics_loganalytics_ingestion_overall_rows:
+    #   metric: azure_metrics_loganalytics_ingestion_overall_rows
+    #   query: |-
+    #     union withsource=sourceTable *
+    #     | project sourceTable
+    #     | summarize count_ = count() by sourceTable
+    #     | project sourceTable, count_ = (todouble(count_) / 3600)
+    #   timespan: PT1H
+    #   fields:
+    #     -
+    #       name: sourceTable
+    #       type: id
+    #     -
+    #       name: count_
+    #       type: value
+    #   defaultField:
+    #     type: ignore
+
+# -- startupProbe
+startupProbe: {}
+#   tcpSocket:
+#     port: http-metrics
+#   initialDelaySeconds: 15
+#   periodSeconds: 10
+#   failureThreshold: 5
+
+# -- livenessProbe
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+# -- readinessProbe
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: http
+
+serviceAccount:
+  create: true
+  automountServiceAccountToken: false
+  name: ""
+  labels: {}
+  annotations: {}
+
+# -- Customize the strategy if set
+strategy: {}
+
+podLabels: {}
+podAnnotations: {}
+
+# -- Pod Security Context
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  supplementalGroups: [1000]
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- Container Security Context
+containerSecurityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  capabilities:
+    drop: ["ALL"]
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  appProtocol: http
+  nodePort:
+  portName: http-metrics
+  annotations: {}
+  labels: {}
+
+netpol:
+  # -- Enable network policy
+  enabled: true
+  # -- Define network policy types
+  policyTypes:
+    - Ingress
+    - Egress
+  # -- Define network policy ingress
+  ingress: []
+  # -- Define network policy egress
+  egress:
+    # DNS
+    - ports:
+      - port: 53
+        protocol: TCP
+    - ports:
+      - port: 53
+        protocol: UDP
+    # HTTPS (Azure REST api)
+    - ports:
+      - port: 443
+        protocol: TCP
+
+extraVolumes: []
+extraVolumeMounts: []
+
+prometheus:
+  monitor:
+    enabled: false
+
+    jobLabel: ""
+
+    additionalAnnotations: {}
+    additionalLabels: {}
+
+    scheme: http
+    basicAuth: {}
+    bearerTokenFile:
+    tlsConfig: {}
+
+    ## proxyUrl: URL of a proxy that should be used for scraping.
+    ##
+    proxyUrl: ""
+
+    relabelings: []
+    metricRelabelings: []
+    interval: ""
+    scrapeTimeout: ""
+
+    ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
+    ##
+    sampleLimit: 0
+
+    ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
+    ##
+    targetLimit: 0
+
+    ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelLimit: 0
+
+    ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelNameLengthLimit: 0
+
+    ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelValueLengthLimit: 0
+
+    ## Transform kubernetes service labels into metric labels
+    ##
+    targetLabels: []
+
+  additionalMonitors:
+    probe:
+      enabled: true
+      path: /probe
+    # subscription:
+    #   enabled: true
+    #   path: /probe/subscription
+    #   params:
+    #     subscription: [ "SUBSCRIPION_ID" ]
+    #     cache: [ "1h" ]
+    #     parallel: [ "5" ]
+    #     module: [ "aks" ]
+    #   relabelings: []
+    #   metricRelabelings: []
+    # subscriptionTpl:
+    #   enabled: true
+    #   tplConfig: true
+    #   path: /probe/subscription
+    #   params: |
+    #     subscription: {{ .Values.global.subscriptions }}
+    #     cache: [ "1h" ]
+    #     parallel: [ "5" ]
+    #     module: [ "aks" ]
+    #   relabelings: []
+    #   metricRelabelings: []

@@ -1,0 +1,105 @@
+{{- if .Values.prometheus.monitor.enabled }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  {{- with .Values.prometheus.monitor.additionalAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: {{ template "azure-loganalytics-exporter.fullname" . }}
+  namespace: {{ template "azure-loganalytics-exporter.namespace" . }}
+  labels:
+    {{ include "azure-loganalytics-exporter.labels" . | nindent 4 }}
+    {{- with .Values.prometheus.monitor.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  jobLabel: {{ default "app.kubernetes.io/name" .Values.prometheus.monitor.jobLabel }}
+  {{- include "servicemonitor.scrapeLimits" .Values.prometheus.monitor | nindent 2 }}
+  selector:
+    matchLabels: {{- include "azure-loganalytics-exporter.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: {{ .Values.service.portName }}
+      scheme: {{ .Values.prometheus.monitor.scheme }}
+    {{- with .Values.prometheus.monitor.basicAuth }}
+      basicAuth: {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.prometheus.monitor.bearerTokenFile }}
+      bearerTokenFile: {{ . }}
+    {{- end }}
+    {{- with .Values.prometheus.monitor.tlsConfig }}
+      tlsConfig:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.prometheus.monitor.proxyUrl }}
+      proxyUrl: {{ . }}
+    {{- end }}
+    {{- with .Values.prometheus.monitor.interval }}
+      interval: {{ . }}
+    {{- end }}
+    {{- with .Values.prometheus.monitor.scrapeTimeout }}
+      scrapeTimeout: {{ . }}
+    {{- end }}
+    {{- with .Values.prometheus.monitor.relabelings }}
+      relabelings:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.prometheus.monitor.metricRelabelings }}
+      metricRelabelings:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+{{- range $moduleName, $moduleOptions := .Values.prometheus.additionalMonitors }}
+  {{- if $moduleOptions.enabled }}
+    - port: {{ $.Values.service.portName }}
+      scheme: {{ $.Values.prometheus.monitor.scheme }}
+      path: {{ $moduleOptions.path }}
+    {{- if $moduleOptions.tplConfig }}
+      {{- if eq (typeOf $moduleOptions.params) "string" }}
+      params:
+        {{ tpl ($moduleOptions.params) $ | nindent 8 }}
+      {{- else }}
+      params:
+        {{ tpl (toYaml $moduleOptions.params) $ | nindent 8 }}
+      {{- end }}
+    {{- else }}
+        {{ toYaml $moduleOptions.params | nindent 8 }}
+    {{- end }}
+    {{- with $.Values.prometheus.monitor.basicAuth }}
+      basicAuth: {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with $.Values.prometheus.monitor.bearerTokenFile }}
+      bearerTokenFile: {{ . }}
+    {{- end }}
+    {{- with $.Values.prometheus.monitor.tlsConfig }}
+      tlsConfig:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with $.Values.prometheus.monitor.proxyUrl }}
+      proxyUrl: {{ . }}
+    {{- end }}
+    {{- if $moduleOptions.interval }}
+      interval: {{ $moduleOptions.interval }}
+    {{- else if $.Values.prometheus.monitor.interval }}
+      interval: {{ $.Values.prometheus.monitor.interval }}
+    {{- end }}
+    {{- if $moduleOptions.scrapeTimeout }}
+      scrapeTimeout: {{ $moduleOptions.scrapeTimeout }}
+    {{- else if $.Values.prometheus.monitor.scrapeTimeout }}
+      scrapeTimeout: {{ $.Values.prometheus.monitor.scrapeTimeout }}
+    {{- end }}
+    {{- with $moduleOptions.relabelings }}
+      relabelings:
+        {{- . | nindent 8 }}
+    {{- end }}
+    {{- with $moduleOptions.metricRelabelings }}
+      metricRelabelings:
+        {{- . | nindent 8 }}
+    {{- end }}
+  {{- end }}
+  {{- with .Values.prometheus.monitor.targetLabels }}
+  targetLabels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}

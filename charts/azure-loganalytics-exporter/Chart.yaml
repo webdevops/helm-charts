@@ -1,0 +1,14 @@
+apiVersion: v2
+name: azure-loganalytics-exporter
+type: application
+description: A Helm chart for azure-loganalytics-exporter
+home: https://github.com/webdevops/azure-loganalytics-exporter
+version: 1.0.0
+appVersion: 22.11.0
+keywords:
+- azure-loganalytics-exporter
+maintainers:
+- email: mblaschke82@gmail.com
+  name: mblaschke
+sources:
+- https://github.com/webdevops/azure-loganalytics-exporter/
