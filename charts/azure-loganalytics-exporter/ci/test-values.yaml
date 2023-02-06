@@ -1,16 +1,20 @@
 config:
   queries:
-    azurerm_subscription_info:
-      metric: azurerm_subscription_info
+    azure_metrics_loganalytics_ingestion_overall_rows:
+      metric: azure_metrics_loganalytics_ingestion_overall_rows
       query: |-
-        ResourceContainers
-        | where type == "microsoft.resources/subscriptions"
-      value: 1
+        union withsource=sourceTable *
+        | project sourceTable
+        | summarize count_ = count() by sourceTable
+        | project sourceTable, count_ = (todouble(count_) / 3600)
+      timespan: PT1H
       fields:
-        - name: name
-        - name: subscriptionId
-          target: subscriptionID
+        -
+          name: sourceTable
           type: id
+        -
+          name: count_
+          type: value
       defaultField:
         type: ignore
 
