@@ -1,0 +1,36 @@
+config:
+  queries:
+    azure_metrics_loganalytics_ingestion_overall_rows:
+      metric: azure_metrics_loganalytics_ingestion_overall_rows
+      query: |-
+        union withsource=sourceTable *
+        | project sourceTable
+        | summarize count_ = count() by sourceTable
+        | project sourceTable, count_ = (todouble(count_) / 3600)
+      timespan: PT1H
+      fields:
+        -
+          name: sourceTable
+          type: id
+        -
+          name: count_
+          type: value
+      defaultField:
+        type: ignore
+
+secrets:
+  test: "{{ $.Release.Namespace }}"
+
+secretsEnableTemplateFunctions: true
+
+extraVolumeMounts:
+  - mountPath: /var/run/secrets/tokens
+    name: vault-token
+extraVolumes:
+  - name: vault-token
+    projected:
+      sources:
+        - serviceAccountToken:
+            path: vault-token
+            expirationSeconds: 7200
+            audience: vault
