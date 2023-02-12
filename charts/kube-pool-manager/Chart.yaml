@@ -4,6 +4,7 @@ type: application
 description: A Helm chart for kube-pool-manager
 home: https://github.com/webdevops/kube-pool-manager
 version: 1.0.8
+# renovate: image=webdevops/kube-pool-manager
 appVersion: 22.9.0
 keywords:
   - kube-pool-manager

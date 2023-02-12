@@ -4,6 +4,7 @@ type: application
 description: A Helm chart for azure-resourcegraph-exporter
 home: https://github.com/webdevops/azure-resourcegraph-exporter
 version: 1.0.0
+# renovate: image=webdevops/azure-resourcegraph-exporter
 appVersion: 22.9.0
 keywords:
 - azure-resourcegraph-exporter

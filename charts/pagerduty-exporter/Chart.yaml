@@ -4,6 +4,7 @@ type: application
 description: A Helm chart for pagerduty-exporter
 home: https://github.com/webdevops/pagerduty-exporter
 version: 1.0.3
+# renovate: image=webdevops/pagerduty-exporter
 appVersion: 22.9.1
 keywords:
 - pagerduty-exporter
