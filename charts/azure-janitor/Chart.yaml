@@ -3,7 +3,7 @@ name: azure-janitor
 type: application
 description: A Helm chart for azure-janitor
 home: https://github.com/webdevops/azure-janitor
-version: 1.0.5
+version: 1.0.6
 # renovate: image=webdevops/azure-janitor
 appVersion: 22.9.0
 keywords:
