@@ -24,7 +24,7 @@ spec:
   template:
     metadata:
       labels:
-{{ include "kube-pool-manager.labels" . | indent 8 }}
+{{ include "kube-pool-manager.selectorLabels" . | indent 8 }}
 {{- with .Values.podLabels }}
 {{ toYaml . | indent 8 }}
 {{- end }}

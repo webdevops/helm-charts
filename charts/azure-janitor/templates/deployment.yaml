@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-{{ include "azure-janitor.labels" . | indent 8 }}
+{{ include "azure-janitor.selectorLabels" . | indent 8 }}
 {{- with .Values.podLabels }}
 {{ toYaml . | indent 8 }}
 {{- end }}

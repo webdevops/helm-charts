@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       labels:
-{{ include "azure-resourcemanager-exporter.labels" . | indent 8 }}
+{{ include "azure-resourcemanager-exporter.selectorLabels" . | indent 8 }}
 {{- with .Values.podLabels }}
 {{ toYaml . | indent 8 }}
 {{- end }}
