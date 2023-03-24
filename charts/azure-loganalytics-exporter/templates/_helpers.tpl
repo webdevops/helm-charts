@@ -49,9 +49,6 @@ app.kubernetes.io/part-of: {{ template "azure-loganalytics-exporter.name" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
-{{- if .Values.podLabels }}
-{{- toYaml .Values.podLabels }}
-{{- end }}
 {{- if .Values.releaseLabel }}
 release: {{ .Release.Name }}
 {{- end }}

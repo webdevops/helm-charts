@@ -24,7 +24,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "azure-resourcegraph-exporter.labels" . | nindent 8 }}
+        {{- include "azure-resourcegraph-exporter.selectorLabels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
