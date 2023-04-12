@@ -16,11 +16,13 @@ replicas: 1
 minReadySeconds: 10
 terminationGracePeriodSeconds: 60
 
-env: {}
+env:
+  {}
   # DEBUG: "true"
   # VERBOSE: "true"
 
-extraEnv: []
+extraEnv:
+  []
   # - name: REDIS_PASSWORD
   #   valueFrom:
   #     secretKeyRef:
@@ -30,7 +32,6 @@ extraEnv: []
 secretsEnableTemplateFunctions: false
 secrets: {}
 # secretName: secretValue
-
 
 resources:
   limits:
@@ -118,15 +119,15 @@ netpol:
   egress:
     # DNS
     - ports:
-      - port: 53
-        protocol: TCP
+        - port: 53
+          protocol: TCP
     - ports:
-      - port: 53
-        protocol: UDP
+        - port: 53
+          protocol: UDP
     # HTTPS (Azure REST api)
     - ports:
-      - port: 443
-        protocol: TCP
+        - port: 443
+          protocol: TCP
 
 prometheus:
   monitor:
@@ -176,6 +177,7 @@ prometheus:
     basicAuth: {}
     bearerTokenFile:
     tlsConfig: {}
+    path: /probe/metrics/list
 
     ## proxyUrl: URL of a proxy that should be used for scraping.
     ##
@@ -212,6 +214,7 @@ prometheus:
 
     probes: []
 #      - name: appgateway
+#        path: /probe/metrics/list
 #        params:
 #          name: ["azure_metrics_appgateway"]
 #          resourceType: ["Microsoft.Network/applicationGateways"]

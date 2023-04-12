@@ -16,6 +16,7 @@ spec:
   endpoints:
     - port: {{ $root.Values.service.portName }}
       scheme: {{ (default .scheme $monitor.scheme) }}
+      path: {{ (default .path $monitor.path) }}
     {{- with (default .basicAuth $monitor.basicAuth) }}
       basicAuth: {{- toYaml . | nindent 8 }}
     {{- end }}
