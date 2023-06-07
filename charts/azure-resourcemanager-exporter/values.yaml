@@ -31,6 +31,11 @@ secretsEnableTemplateFunctions: false
 secrets: {}
 # secretName: secretValue
 
+existingConfigMap: ""
+config: {}
+
+extraVolumes: []
+extraVolumeMounts: []
 
 resources:
   limits:
@@ -48,8 +53,6 @@ tolerations: []
 
 restartPolicy: Always
 priorityClassName: ""
-
-config: ""
 
 startupProbe:
   tcpSocket:
