@@ -755,6 +755,24 @@ entries:
     version: 1.0.2
   kube-pool-manager:
   - apiVersion: v2
+    appVersion: 23.6.0
+    created: "2023-06-14T19:09:57.485839054Z"
+    description: A Helm chart for kube-pool-manager
+    digest: 0d8006f63037b14129f98e2e5044bec228f40373a803fe6e88bece4541c0836e
+    home: https://github.com/webdevops/kube-pool-manager
+    keywords:
+    - kube-pool-manager
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: kube-pool-manager
+    sources:
+    - https://github.com/webdevops/kube-pool-manager/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/kube-pool-manager-1.0.11/kube-pool-manager-1.0.11.tgz
+    version: 1.0.11
+  - apiVersion: v2
     appVersion: 22.9.0
     created: "2023-03-24T19:57:04.444855169Z"
     description: A Helm chart for kube-pool-manager
@@ -1007,4 +1025,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2023-06-12T23:08:48.041597162Z"
+generated: "2023-06-14T19:09:57.485955357Z"
