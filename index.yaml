@@ -475,6 +475,24 @@ entries:
     version: 1.0.0
   azure-resourcemanager-exporter:
   - apiVersion: v2
+    appVersion: 23.6.1
+    created: "2023-06-15T19:31:52.303409226Z"
+    description: A Helm chart for azure-resourcemanager-exporter
+    digest: 3628bd61d80933693f53ff9eee53d1a11fc0daae6c99055651550ec3cd718576
+    home: https://github.com/webdevops/azure-resourcemanager-exporter
+    keywords:
+    - azure-resourcemanager-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-resourcemanager-exporter
+    sources:
+    - https://github.com/webdevops/azure-resourcemanager-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-resourcemanager-exporter-1.2.1/azure-resourcemanager-exporter-1.2.1.tgz
+    version: 1.2.1
+  - apiVersion: v2
     appVersion: 23.6.0
     created: "2023-06-07T10:57:17.066271881Z"
     description: A Helm chart for azure-resourcemanager-exporter
@@ -1043,4 +1061,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2023-06-14T23:59:29.461642054Z"
+generated: "2023-06-15T19:31:52.303601923Z"
