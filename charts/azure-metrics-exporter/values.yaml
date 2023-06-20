@@ -171,46 +171,47 @@ prometheus:
 
   ## azure metrics probe scrapes
   metricProbes:
-    jobLabel: ""
+    probeDefaults:
+      jobLabel: ""
 
-    scheme: http
-    basicAuth: {}
-    bearerTokenFile:
-    tlsConfig: {}
-    path: /probe/metrics/list
+      scheme: http
+      basicAuth: {}
+      bearerTokenFile:
+      tlsConfig: {}
+      path: /probe/metrics/list
 
-    ## proxyUrl: URL of a proxy that should be used for scraping.
-    ##
-    proxyUrl: ""
+      ## proxyUrl: URL of a proxy that should be used for scraping.
+      ##
+      proxyUrl: ""
 
-    relabelings: []
-    metricRelabelings: []
-    interval: ""
-    scrapeTimeout: ""
+      relabelings: []
+      metricRelabelings: []
+      interval: ""
+      scrapeTimeout: ""
 
-    ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
-    ##
-    sampleLimit: 0
+      ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
+      ##
+      sampleLimit: 0
 
-    ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
-    ##
-    targetLimit: 0
+      ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
+      ##
+      targetLimit: 0
 
-    ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-    ##
-    labelLimit: 0
+      ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+      ##
+      labelLimit: 0
 
-    ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-    ##
-    labelNameLengthLimit: 0
+      ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+      ##
+      labelNameLengthLimit: 0
 
-    ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-    ##
-    labelValueLengthLimit: 0
+      ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+      ##
+      labelValueLengthLimit: 0
 
-    # global probe params (will be merged with probes[].params)
-    # and can act as defaults
-    params: {}
+      # global probe params (will be merged with probes[].params)
+      # and can act as defaults
+      params: {}
 
     probes: []
 #      - name: appgateway
