@@ -71,6 +71,7 @@ readinessProbe:
   failureThreshold: 5
 
 serviceAccount:
+  create: true
   name: azure-metrics-exporter
   labels: {}
   annotations: {}
