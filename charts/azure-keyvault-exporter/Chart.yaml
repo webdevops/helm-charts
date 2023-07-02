@@ -5,7 +5,7 @@ description: A Helm chart for azure-keyvault-exporter
 home: https://github.com/webdevops/azure-keyvault-exporter
 version: 1.0.7
 # renovate: image=webdevops/azure-keyvault-exporter
-appVersion: 23.6.0
+appVersion: 23.7.1
 keywords:
 - azure-keyvault-exporter
 maintainers:
