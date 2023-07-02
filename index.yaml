@@ -3,6 +3,24 @@ entries:
   azure-janitor:
   - apiVersion: v2
     appVersion: 22.9.0
+    created: "2023-07-02T19:23:45.859943768Z"
+    description: A Helm chart for azure-janitor
+    digest: 2eafb19df225a3470f6adf445aed10dade33d8ea1bf53a610ea0ba0a97db9e98
+    home: https://github.com/webdevops/azure-janitor
+    keywords:
+    - azure-janitor
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-janitor
+    sources:
+    - https://github.com/webdevops/azure-janitor/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-janitor-1.0.8/azure-janitor-1.0.8.tgz
+    version: 1.0.8
+  - apiVersion: v2
+    appVersion: 22.9.0
     created: "2023-03-24T19:57:03.228540981Z"
     description: A Helm chart for azure-janitor
     digest: 942507a9aa5b8b52a76138541cf364f61ea42613d59540c3e0b5116e35bbd413
@@ -146,6 +164,24 @@ entries:
     - https://github.com/webdevops/helm-charts/releases/download/azure-janitor-1.0.0/azure-janitor-1.0.0.tgz
     version: 1.0.0
   azure-keyvault-exporter:
+  - apiVersion: v2
+    appVersion: 23.7.1
+    created: "2023-07-02T19:23:46.023703076Z"
+    description: A Helm chart for azure-keyvault-exporter
+    digest: 433718fd4a2c4e2669c8feca04569bae004d33de4987d005ff4d5a0573213b2e
+    home: https://github.com/webdevops/azure-keyvault-exporter
+    keywords:
+    - azure-keyvault-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-keyvault-exporter
+    sources:
+    - https://github.com/webdevops/azure-keyvault-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-keyvault-exporter-1.0.7/azure-keyvault-exporter-1.0.7.tgz
+    version: 1.0.7
   - apiVersion: v2
     appVersion: 23.7.1
     created: "2023-07-02T01:20:44.972928684Z"
@@ -348,6 +384,24 @@ entries:
   azure-metrics-exporter:
   - apiVersion: v2
     appVersion: 23.7.0
+    created: "2023-07-02T19:23:46.168327177Z"
+    description: A Helm chart for azure-metrics-exporter
+    digest: faf0119cb901f8a4524dd48e881b135341380aa787696c2743c95d15211ed4ad
+    home: https://github.com/webdevops/azure-metrics-exporter
+    keywords:
+    - azure-metrics-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-metrics-exporter
+    sources:
+    - https://github.com/webdevops/azure-metrics-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-metrics-exporter-1.0.7/azure-metrics-exporter-1.0.7.tgz
+    version: 1.0.7
+  - apiVersion: v2
+    appVersion: 23.7.0
     created: "2023-07-02T18:38:21.954578204Z"
     description: A Helm chart for azure-metrics-exporter
     digest: 976745560ca0bab9e45ce298dc7da872c0cda1f7effc05e9c358aa436f8a0408
@@ -548,6 +602,24 @@ entries:
   azure-resourcemanager-exporter:
   - apiVersion: v2
     appVersion: 23.6.1
+    created: "2023-07-02T19:23:46.320417342Z"
+    description: A Helm chart for azure-resourcemanager-exporter
+    digest: d36bc6b053dd61ac92037e2beb220cd6f2f52acf6a49800a51cc477ff86c5656
+    home: https://github.com/webdevops/azure-resourcemanager-exporter
+    keywords:
+    - azure-resourcemanager-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-resourcemanager-exporter
+    sources:
+    - https://github.com/webdevops/azure-resourcemanager-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-resourcemanager-exporter-1.2.2/azure-resourcemanager-exporter-1.2.2.tgz
+    version: 1.2.2
+  - apiVersion: v2
+    appVersion: 23.6.1
     created: "2023-06-15T19:31:52.303409226Z"
     description: A Helm chart for azure-resourcemanager-exporter
     digest: 3628bd61d80933693f53ff9eee53d1a11fc0daae6c99055651550ec3cd718576
@@ -691,6 +763,24 @@ entries:
     - https://github.com/webdevops/helm-charts/releases/download/azure-resourcemanager-exporter-1.0.0/azure-resourcemanager-exporter-1.0.0.tgz
     version: 1.0.0
   azure-scheduledevents-manager:
+  - apiVersion: v2
+    appVersion: 23.6.0
+    created: "2023-07-02T19:23:46.484557448Z"
+    description: A Helm chart for azure-scheduledevents-manager
+    digest: a43d8598659b54416b4dfdf94b08c84b11baf6c324dbcb9be15b510ffee538af
+    home: https://github.com/webdevops/azure-scheduledevents-manager
+    keywords:
+    - azure-scheduledevents-manager
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-scheduledevents-manager
+    sources:
+    - https://github.com/webdevops/azure-scheduledevents-manager/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-scheduledevents-manager-1.0.12/azure-scheduledevents-manager-1.0.12.tgz
+    version: 1.0.12
   - apiVersion: v2
     appVersion: 23.6.0
     created: "2023-06-16T15:26:44.749255545Z"
@@ -1063,6 +1153,24 @@ entries:
   pagerduty-exporter:
   - apiVersion: v2
     appVersion: 22.12.0
+    created: "2023-07-02T19:23:46.620298792Z"
+    description: A Helm chart for pagerduty-exporter
+    digest: d41be90f89a0e1137fa4ef8ba140cd76273721ee24c883fa1d2c2a6930621e35
+    home: https://github.com/webdevops/pagerduty-exporter
+    keywords:
+    - pagerduty-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: pagerduty-exporter
+    sources:
+    - https://github.com/webdevops/pagerduty-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.1.2/pagerduty-exporter-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: 22.12.0
     created: "2023-03-24T19:57:04.647346772Z"
     description: A Helm chart for pagerduty-exporter
     digest: 785cfd5a270ba603dd88bce094949a3a0a1f84217da3cb63f8fac903f49e52ee
@@ -1151,4 +1259,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2023-07-02T18:38:21.954844508Z"
+generated: "2023-07-02T19:23:46.62072699Z"
