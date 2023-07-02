@@ -1,5 +1,5 @@
 {{ $root := . }}
-{{ $monitorDefaults := .Values.prometheus.metricProbes.probeDefaults }}
+{{ $monitorDefaults := .Values.prometheus.metricProbes }}
 {{- range .Values.prometheus.metricProbes.probes }}
 ---
 apiVersion: monitoring.coreos.com/v1
