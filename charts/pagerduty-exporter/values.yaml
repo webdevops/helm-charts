@@ -70,6 +70,7 @@ readinessProbe:
   failureThreshold: 5
 
 serviceAccount:
+  create: true
   name: pagerduty-exporter
   labels: {}
   annotations: {}

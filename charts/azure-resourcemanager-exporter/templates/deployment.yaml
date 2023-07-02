@@ -62,10 +62,20 @@ spec:
           {{- with .Values.extraEnv }}
             {{- tpl (toYaml .) $ | nindent 12 }}
           {{- end }}
+          {{- if not .Values.config.existingConfigMap }}
+            - name: CONFIG
+              value: "/config/config.yaml"
+          {{- end }}
           ports:
             - containerPort: 8080
               name: http-metrics
               protocol: TCP
+          volumeMounts:
+            - mountPath: /config/
+              name: config
+          {{- with .Values.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
 
 {{- with .Values.resources }}
           resources: {{ toYaml . | nindent 12 }}
@@ -89,3 +99,10 @@ spec:
 {{- with .Values.tolerations }}
       tolerations: {{ toYaml . | nindent 8 }}
 {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.config.existingConfigMap | default (include "azure-resourcemanager-exporter.fullname" .) }}
+      {{- with .Values.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

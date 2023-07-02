@@ -1,0 +1,11 @@
+{{- if not .Values.config.existingConfigMap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "azure-resourcemanager-exporter.fullname" . }}
+  labels:
+    {{- include "azure-resourcemanager-exporter.labels" . | nindent 4 }}
+data:
+  config.yaml: |- {{ toYaml .Values.config | required "Config must be specified" | nindent 4 }}
+
+{{- end }}
