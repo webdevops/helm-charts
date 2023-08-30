@@ -62,7 +62,7 @@ spec:
       params:
         {{ tpl (toYaml $moduleOptions.params) $ | nindent 8 }}
       {{- end }}
-    {{- else }}
+    {{- else if $moduleOptions.params }}
         {{ toYaml $moduleOptions.params | nindent 8 }}
     {{- end }}
     {{- with $.Values.prometheus.monitor.basicAuth }}
@@ -97,9 +97,9 @@ spec:
         {{- . | nindent 8 }}
     {{- end }}
   {{- end }}
+{{- end }}
   {{- with .Values.prometheus.monitor.targetLabels }}
   targetLabels:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-{{- end }}
 {{- end }}
