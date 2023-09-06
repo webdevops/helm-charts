@@ -1,3 +1,4 @@
+{{- $configmapHash := include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
 {{- $secretHash := include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
 ---
 apiVersion: apps/v1
@@ -5,7 +6,7 @@ kind: Deployment
 metadata:
   name: {{ template "azure-resourcemanager-exporter.fullname" . }}
   namespace: {{ template "azure-resourcemanager-exporter.namespace" . }}
-  labels: {{ include "azure-resourcemanager-exporter.labels" . | indent 4 }}
+  labels: {{ include "azure-resourcemanager-exporter.labels" . | nindent 4 }}
 spec:
   {{- with .Values.replicas }}
   replicas: {{ . }}
@@ -15,22 +16,28 @@ spec:
   {{- end }}
 
   selector:
-    matchLabels: {{- include "azure-resourcemanager-exporter.selectorLabels" . | nindent 6 }}
+    matchLabels: {{ include "azure-resourcemanager-exporter.selectorLabels" . | nindent 6 }}
 
   minReadySeconds: {{ .minReadySeconds }}
   template:
     metadata:
       labels:
-{{ include "azure-resourcemanager-exporter.selectorLabels" . | indent 8 }}
-{{- with .Values.podLabels }}
-{{ toYaml . | indent 8 }}
-{{- end }}
+        {{- include "azure-resourcemanager-exporter.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{ toYaml . | indent 8 }}
+        {{- end }}
+      {{- if or (not .Values.existingConfigMap) (.Values.podAnnotations) (.Values.secrets) }}
       annotations:
+        {{- if not .Values.existingConfigMap }}
+        checksum/config: {{ $configmapHash | quote }}
+        {{- end }}
+        {{- if .Values.secrets }}
         checksum/secret: {{ $secretHash | quote }}
-{{- with .Values.podAnnotations }}
-{{ toYaml . | indent 8 }}
-{{- end }}
-
+        {{- end }}
+        {{- with .Values.podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- end }}
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name | quote }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
@@ -62,7 +69,7 @@ spec:
           {{- with .Values.extraEnv }}
             {{- tpl (toYaml .) $ | nindent 12 }}
           {{- end }}
-          {{- if not .Values.config.existingConfigMap }}
+          {{- if not .Values.existingConfigMap }}
             - name: CONFIG
               value: "/config/config.yaml"
           {{- end }}
@@ -102,7 +109,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ .Values.config.existingConfigMap | default (include "azure-resourcemanager-exporter.fullname" .) }}
+            name: {{ .Values.existingConfigMap | default (include "azure-resourcemanager-exporter.fullname" .) }}
       {{- with .Values.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

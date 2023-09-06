@@ -41,12 +41,12 @@ Allow the release namespace to be overridden for multi-namespace deployments in 
 {{- end -}}
 
 {{/* Generate basic labels */}}
-{{- define "azure-resourcemanager-exporter.labels" }}
+{{- define "azure-resourcemanager-exporter.labels" -}}
 helm.sh/chart: {{ template "azure-resourcemanager-exporter.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/component: metrics
 app.kubernetes.io/part-of: {{ template "azure-resourcemanager-exporter.name" . }}
-{{- include "azure-resourcemanager-exporter.selectorLabels" . }}
+{{ include "azure-resourcemanager-exporter.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -58,7 +58,7 @@ release: {{ .Release.Name }}
 {{/*
 Selector labels
 */}}
-{{- define "azure-resourcemanager-exporter.selectorLabels" }}
+{{- define "azure-resourcemanager-exporter.selectorLabels" -}}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ template "azure-resourcemanager-exporter.name" . }}
 {{- end }}
