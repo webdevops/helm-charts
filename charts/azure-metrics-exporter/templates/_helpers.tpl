@@ -41,12 +41,12 @@ Allow the release namespace to be overridden for multi-namespace deployments in 
 {{- end -}}
 
 {{/* Generate basic labels */}}
-{{- define "azure-metrics-exporter.labels" }}
+{{- define "azure-metrics-exporter.labels" -}}
 helm.sh/chart: {{ template "azure-metrics-exporter.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/component: metrics
 app.kubernetes.io/part-of: {{ template "azure-metrics-exporter.name" . }}
-{{- include "azure-metrics-exporter.selectorLabels" . }}
+{{ include "azure-metrics-exporter.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -58,7 +58,7 @@ release: {{ .Release.Name }}
 {{/*
 Selector labels
 */}}
-{{- define "azure-metrics-exporter.selectorLabels" }}
+{{- define "azure-metrics-exporter.selectorLabels" -}}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: {{ template "azure-metrics-exporter.name" . }}
 {{- end }}
