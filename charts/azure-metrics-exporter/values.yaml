@@ -135,6 +135,9 @@ prometheus:
 
     jobLabel: ""
 
+    additionalAnnotations: {}
+    additionalLabels: {}
+
     scheme: http
     basicAuth: {}
     bearerTokenFile:

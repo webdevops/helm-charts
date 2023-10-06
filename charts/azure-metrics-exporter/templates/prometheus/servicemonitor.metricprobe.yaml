@@ -5,9 +5,17 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
+  {{- with .Values.prometheus.monitor.additionalAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   name: {{ template "azure-metrics-exporter.fullname" $root }}-{{ .name }}
   namespace: {{ template "azure-metrics-exporter.namespace" $root }}
-  labels: {{ include "azure-metrics-exporter.labels" $root | indent 4 }}
+  labels: 
+    {{ include "azure-metrics-exporter.labels" $root | indent 4 }}
+    {{- with .Values.prometheus.monitor.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   jobLabel: {{ default "app.kubernetes.io/name" $monitorDefaults.jobLabel }}
   {{ include "servicemonitor.scrapeLimits" $monitorDefaults | indent 2 }}
