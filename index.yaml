@@ -655,6 +655,24 @@ entries:
   azure-resourcegraph-exporter:
   - apiVersion: v2
     appVersion: 23.6.0
+    created: "2023-10-23T22:11:00.110379297Z"
+    description: A Helm chart for azure-resourcegraph-exporter
+    digest: 4454f7185077b1d27c11eaa188f47f7174a728228c0600533265bd07b81c105e
+    home: https://github.com/webdevops/azure-resourcegraph-exporter
+    keywords:
+    - azure-resourcegraph-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-resourcegraph-exporter
+    sources:
+    - https://github.com/webdevops/azure-resourcegraph-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-resourcegraph-exporter-1.1.0/azure-resourcegraph-exporter-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 23.6.0
     created: "2023-10-23T19:09:53.741452956Z"
     description: A Helm chart for azure-resourcegraph-exporter
     digest: 9dc4a5125ad895609a8e40ee04181d6b794f11620c0ffd9646bd9da04f95e721
@@ -1475,4 +1493,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2023-10-23T19:23:57.439200409Z"
+generated: "2023-10-23T22:11:00.110616816Z"
