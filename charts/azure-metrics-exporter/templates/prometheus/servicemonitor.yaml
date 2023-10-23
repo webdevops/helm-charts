@@ -4,8 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   {{- with .Values.prometheus.monitor.additionalAnnotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
+  annotations: {{- toYaml . | nindent 4 }}
   {{- end }}
   name: {{ template "azure-metrics-exporter.fullname" . }}
   namespace: {{ template "azure-metrics-exporter.namespace" . }}
