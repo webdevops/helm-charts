@@ -3,9 +3,15 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
+  {{- with .Values.prometheus.monitor.additionalAnnotations }}
+  annotations: {{- toYaml . | nindent 4 }}
+  {{- end }}
   name: {{ template "azure-metrics-exporter.fullname" . }}
   namespace: {{ template "azure-metrics-exporter.namespace" . }}
   labels: {{ include "azure-metrics-exporter.labels" . | indent 4 }}
+    {{- with .Values.prometheus.monitor.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   jobLabel: {{ default "app.kubernetes.io/name" .Values.prometheus.monitor.jobLabel }}
   {{ include "servicemonitor.scrapeLimits" .Values.prometheus.monitor | indent 2 }}
