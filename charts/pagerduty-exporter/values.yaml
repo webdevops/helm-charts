@@ -93,6 +93,7 @@ securityContext:
 containerSecurityContext:
   readOnlyRootFilesystem: true
   runAsNonRoot: true
+  allowPrivilegeEscalation: false
   capabilities:
     drop: ["ALL"]
 
