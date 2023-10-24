@@ -3,7 +3,7 @@ name: azure-scheduledevents-manager
 type: application
 description: A Helm chart for azure-scheduledevents-manager
 home: https://github.com/webdevops/azure-scheduledevents-manager
-version: 1.0.13
+version: 1.0.14
 # renovate: image=webdevops/azure-scheduledevents-exporter
 appVersion: 23.6.0
 keywords:

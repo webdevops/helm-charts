@@ -67,10 +67,15 @@ app.kubernetes.io/name: {{ template "azure-scheduledevents-manager.name" . }}
 The image to use
 */}}
 {{- define "azure-scheduledevents-manager.image" -}}
-{{- if .Values.image.sha -}}
-{{- printf "%s/%s:%s%s@%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag .Values.image.tagFlavor) .Values.image.sha }}
+{{- if .Values.image.registry -}}
+{{- $imageQualifier := (printf "%s/%s" .Values.image.registry .Values.image.repository) -}}
 {{- else -}}
-{{- printf "%s/%s:%s%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag) .Values.image.tagFlavor }}
+{{- $imageQualifier := .Values.image.repository -}}
+{{- end }}
+{{- if .Values.image.sha -}}
+{{- printf "%s:%s%s@%s" $imageQualifier (default (printf "%s" .Chart.AppVersion) .Values.image.tag .Values.image.tagFlavor) .Values.image.sha }}
+{{- else -}}
+{{- printf "%s:%s%s" $imageQualifier (default (printf "%s" .Chart.AppVersion) .Values.image.tag) .Values.image.tagFlavor }}
 {{- end }}
 {{- end }}
 
