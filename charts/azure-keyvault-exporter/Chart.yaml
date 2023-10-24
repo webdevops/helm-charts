@@ -3,7 +3,7 @@ name: azure-keyvault-exporter
 type: application
 description: A Helm chart for azure-keyvault-exporter
 home: https://github.com/webdevops/azure-keyvault-exporter
-version: 1.0.8
+version: 1.0.9
 # renovate: image=webdevops/azure-keyvault-exporter
 appVersion: 23.7.1
 keywords:
