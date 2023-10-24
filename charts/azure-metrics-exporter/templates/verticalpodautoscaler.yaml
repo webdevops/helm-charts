@@ -5,7 +5,7 @@ metadata:
   name: {{ template "azure-metrics-exporter.fullname" . }}
   namespace: {{ template "azure-metrics-exporter.namespace" . }}
   labels:
-    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
+    {{- include "azure-metrics-exporter.labels" . | indent 4 }}
 spec:
   {{- with .Values.verticalPodAutoscaler.recommenders }}
   recommenders:

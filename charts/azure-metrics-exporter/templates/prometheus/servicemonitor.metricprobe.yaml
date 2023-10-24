@@ -5,14 +5,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  {{- with .Values.prometheus.monitor.additionalAnnotations }}
-  annotations: {{- toYaml . | nindent 4 }}
-  {{- end }}
   name: {{ template "azure-metrics-exporter.fullname" $root }}-{{ .name }}
   namespace: {{ template "azure-metrics-exporter.namespace" $root }}
-  labels: 
-    {{ include "azure-metrics-exporter.labels" $root | indent 4 }}
-    {{- with .Values.prometheus.monitor.additionalLabels }}
+  {{- with $root.Values.prometheus.monitor.additionalAnnotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{ include "azure-metrics-exporter.labels" $root | nindent 4 }}
+    {{- with $root.Values.prometheus.monitor.additionalLabels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
@@ -22,30 +22,30 @@ spec:
     matchLabels: {{- include "azure-metrics-exporter.selectorLabels" $root | nindent 6 }}
   endpoints:
     - port: {{ $root.Values.service.portName }}
-      scheme: {{ (default .scheme $monitorDefaults.scheme) }}
-      path: {{ (default .path $monitorDefaults.path) }}
-    {{- with (default .basicAuth $monitorDefaults.basicAuth) }}
+      scheme: {{ (default $monitorDefaults.scheme .scheme) }}
+      path: {{ (default $monitorDefaults.path .path) }}
+    {{- with (default $monitorDefaults.basicAuth .basicAuth) }}
       basicAuth: {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with (default .bearerTokenFile $monitorDefaults.bearerTokenFile) }}
+    {{- with (default $monitorDefaults.bearerTokenFile .bearerTokenFile) }}
       bearerTokenFile: {{ . }}
     {{- end }}
-    {{- with (default .tlsConfig $monitorDefaults.tlsConfig) }}
+    {{- with (default $monitorDefaults.tlsConfig .tlsConfig) }}
       tlsConfig: {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with (default .proxyUrl $monitorDefaults.proxyUrl) }}
+    {{- with (default $monitorDefaults.proxyUrl .proxyUrl) }}
       proxyUrl: {{ . }}
     {{- end }}
-    {{- with (default .interval $monitorDefaults.interval) }}
+    {{- with (default $monitorDefaults.interval .interval) }}
       interval: {{ . }}
     {{- end }}
-    {{- with (default .scrapeTimeout $monitorDefaults.scrapeTimeout) }}
+    {{- with (default $monitorDefaults.scrapeTimeout .scrapeTimeout) }}
       scrapeTimeout: {{ . }}
     {{- end }}
-    {{- with (default .relabelings $monitorDefaults.relabelings) }}
+    {{- with (default $monitorDefaults.relabelings .relabelings) }}
       relabelings: {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with (default .metricRelabelings $monitorDefaults.metricRelabelings) }}
+    {{- with (default $monitorDefaults.metricRelabelings .metricRelabelings) }}
       metricRelabelings: {{- toYaml . | nindent 8 }}
     {{- end }}
       params:
