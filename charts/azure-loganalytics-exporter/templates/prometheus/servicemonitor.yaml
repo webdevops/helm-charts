@@ -56,14 +56,12 @@ spec:
       path: {{ $moduleOptions.path }}
     {{- if $moduleOptions.tplConfig }}
       {{- if eq (typeOf $moduleOptions.params) "string" }}
-      params:
-        {{ tpl ($moduleOptions.params) $ | nindent 8 }}
+      params: {{ tpl ($moduleOptions.params) $ | nindent 8 }}
       {{- else }}
-      params:
-        {{ tpl (toYaml $moduleOptions.params) $ | nindent 8 }}
+      params: {{ tpl (toYaml $moduleOptions.params) $ | nindent 8 }}
       {{- end }}
     {{- else if $moduleOptions.params }}
-        {{ toYaml $moduleOptions.params | nindent 8 }}
+      params: {{ toYaml $moduleOptions.params | nindent 8 }}
     {{- end }}
     {{- with $.Values.prometheus.monitor.basicAuth }}
       basicAuth: {{- toYaml . | nindent 8 }}
