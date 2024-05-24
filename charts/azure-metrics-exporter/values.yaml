@@ -173,6 +173,8 @@ prometheus:
     ##
     labelValueLengthLimit: 0
 
+    namespaceSelector: {}
+
   ## azure metrics probe scrapes
   metricProbes:
     jobLabel: ""
