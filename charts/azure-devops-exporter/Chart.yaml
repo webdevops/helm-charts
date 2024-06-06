@@ -1,0 +1,15 @@
+apiVersion: v2
+name: azure-devops-exporter
+type: application
+description: A Helm chart for azure-devops-exporter
+home: https://github.com/webdevops/azure-devops-exporter
+version: 1.0.0
+# renovate: image=webdevops/azure-devops-exporter
+appVersion: 24.6.0
+keywords:
+  - azure-devops-exporter
+maintainers:
+  - email: mblaschke82@gmail.com
+    name: mblaschke
+sources:
+  - https://github.com/webdevops/azure-devops-exporter/

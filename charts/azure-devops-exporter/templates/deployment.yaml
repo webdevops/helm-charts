@@ -1,0 +1,94 @@
+{{- $secretHash := include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "azure-devops-exporter.fullname" . }}
+  namespace: {{ template "azure-devops-exporter.namespace" . }}
+  labels: {{ include "azure-devops-exporter.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.replicas }}
+  replicas: {{ . }}
+  {{- end }}
+  {{- with .Values.strategy }}
+  strategy: {{ toYaml . | nindent 4 }}
+  {{- end }}
+
+  selector:
+    matchLabels: {{ include "azure-devops-exporter.selectorLabels" . | nindent 6 }}
+
+  minReadySeconds: {{ .minReadySeconds }}
+  template:
+    metadata:
+      labels:
+        {{- include "azure-devops-exporter.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- if or (.Values.podAnnotations) (.Values.secrets) }}
+      annotations:
+        {{- if .Values.secrets }}
+        checksum/secret: {{ $secretHash | quote }}
+        {{- end }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- end }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name | quote }}
+      priorityClassName: {{ .Values.priorityClassName | quote }}
+
+      securityContext: {{ toYaml .Values.securityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+
+      containers:
+        #######################
+        # Kube pool manager
+        #######################
+        - name: azure-devops-exporter
+          image: {{ include "azure-devops-exporter.image" . | quote }}
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+
+          securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
+          env:
+          {{- range $index, $val := .Values.secrets }}
+            - name: {{ $index | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "azure-devops-exporter.fullname" $ }}
+                  key: {{ $index | quote }}
+          {{- end }}
+          {{- range $name, $value := .Values.env }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+          {{- end }}
+          {{- with .Values.extraEnv }}
+            {{- tpl (toYaml .) $ | nindent 12 }}
+          {{- end }}
+          ports:
+            - containerPort: 8080
+              name: http-metrics
+              protocol: TCP
+
+{{- with .Values.resources }}
+          resources: {{ toYaml . | nindent 12 }}
+{{- end }}
+{{- with .Values.startupProbe }}
+          startupProbe: {{ toYaml . | nindent 12 }}
+{{- end }}
+{{- with .Values.livenessProbe }}
+          livenessProbe: {{ toYaml . | nindent 12 }}
+{{- end }}
+{{- with .Values.readinessProbe }}
+          readinessProbe: {{ toYaml . | nindent 12 }}
+{{- end }}
+
+{{- with .Values.nodeSelector }}
+      nodeSelector: {{ toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.affinity }}
+      affinity: {{ toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations: {{ toYaml . | nindent 8 }}
+{{- end }}

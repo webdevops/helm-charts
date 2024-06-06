@@ -1,0 +1,208 @@
+# -- String to partially override fullname template (will maintain the release name)
+nameOverride: ""
+
+# -- String to fully override fullname template
+fullnameOverride: ""
+
+namespaceOverride: ""
+
+image:
+  registry: docker.io
+  repository: webdevops/azure-devops-exporter
+  tag: ""
+  pullPolicy: IfNotPresent
+
+replicas: 1
+minReadySeconds: 10
+terminationGracePeriodSeconds: 60
+
+env: {}
+  # DEBUG: "true"
+  # VERBOSE: "true"
+
+extraEnv: []
+  # - name: REDIS_PASSWORD
+  #   valueFrom:
+  #     secretKeyRef:
+  #       key: redis-password
+  #       name: redis-config-0.0.2
+
+secretsEnableTemplateFunctions: false
+secrets: {}
+# secretName: secretValue
+
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 200Mi
+  requests:
+    cpu: 100m
+    memory: 200Mi
+
+nodeSelector:
+  kubernetes.io/os: linux
+
+affinity: {}
+tolerations: []
+
+restartPolicy: Always
+priorityClassName: ""
+
+config: ""
+
+startupProbe:
+  tcpSocket:
+    port: http-metrics
+  initialDelaySeconds: 15
+  periodSeconds: 10
+  failureThreshold: 5
+livenessProbe:
+  tcpSocket:
+    port: http-metrics
+  initialDelaySeconds: 15
+  periodSeconds: 30
+  failureThreshold: 5
+readinessProbe:
+  tcpSocket:
+    port: http-metrics
+  initialDelaySeconds: 15
+  periodSeconds: 30
+  failureThreshold: 5
+
+serviceAccount:
+  create: true
+  name: azure-devops-exporter
+  labels: {}
+  annotations: {}
+
+## Customize the strategy if set
+strategy: {}
+
+podLabels: {}
+podAnnotations: {}
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  supplementalGroups: [1000]
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+containerSecurityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+
+# -- registry secret names as an array
+imagePullSecrets: []
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  appProtocol: http
+  nodePort:
+  portName: http-metrics
+  annotations: {}
+  labels: {}
+
+netpol:
+  enabled: true
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: []
+  egress:
+    # DNS
+    - ports:
+      - port: 53
+        protocol: TCP
+    - ports:
+      - port: 53
+        protocol: UDP
+    # HTTPS (Azure REST api)
+    - ports:
+      - port: 443
+        protocol: TCP
+
+prometheus:
+  monitor:
+    enabled: false
+
+    jobLabel: ""
+
+    additionalAnnotations: {}
+    additionalLabels: {}
+
+    scheme: http
+    basicAuth: {}
+    bearerTokenFile:
+    tlsConfig: {}
+
+    ## proxyUrl: URL of a proxy that should be used for scraping.
+    ##
+    proxyUrl: ""
+
+    relabelings: []
+    metricRelabelings: []
+    interval: ""
+    scrapeTimeout: ""
+
+    ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
+    ##
+    sampleLimit: 0
+
+    ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
+    ##
+    targetLimit: 0
+
+    ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelLimit: 0
+
+    ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelNameLengthLimit: 0
+
+    ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+    ##
+    labelValueLengthLimit: 0
+
+# Enable vertical pod autoscaler support
+verticalPodAutoscaler:
+  enabled: false
+
+  # Recommender responsible for generating recommendation for the object.
+  # List should be empty (then the default recommender will generate the recommendation)
+  # or contain exactly one recommender.
+  # recommenders:
+  # - name: custom-recommender-performance
+
+  # List of resources that the vertical pod autoscaler can control. Defaults to cpu and memory
+  controlledResources: []
+  # Specifies which resource values should be controlled: RequestsOnly or RequestsAndLimits.
+  # controlledValues: RequestsAndLimits
+
+  # Define the max allowed resources for the pod
+  maxAllowed: {}
+  # cpu: 200m
+  # memory: 100Mi
+  # Define the min allowed resources for the pod
+  minAllowed: {}
+  # cpu: 200m
+  # memory: 100Mi
+
+  updatePolicy:
+    # Specifies minimal number of replicas which need to be alive for VPA Updater to attempt pod eviction
+    # minReplicas: 1
+    # Specifies whether recommended updates are applied when a Pod is started and whether recommended updates
+    # are applied during the life of a Pod. Possible values are "Off", "Initial", "Recreate", and "Auto".
+    updateMode: Auto
+
+global:
+  imagePullSecrets: []
