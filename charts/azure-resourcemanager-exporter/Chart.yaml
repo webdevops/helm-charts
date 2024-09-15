@@ -3,9 +3,9 @@ name: azure-resourcemanager-exporter
 type: application
 description: A Helm chart for azure-resourcemanager-exporter
 home: https://github.com/webdevops/azure-resourcemanager-exporter
-version: 1.3.0
+version: 1.3.1
 # renovate: image=webdevops/azure-resourcemanager-exporter
-appVersion: 23.6.1
+appVersion: 24.9.0
 keywords:
 - azure-resourcemanager-exporter
 maintainers:
