@@ -382,6 +382,24 @@ entries:
     version: 1.0.0
   azure-loganalytics-exporter:
   - apiVersion: v2
+    appVersion: 24.9.0
+    created: "2024-09-15T14:18:43.281532283Z"
+    description: A Helm chart for azure-loganalytics-exporter
+    digest: a5f4aeeec1619e86f451450c7fa680c694a0eb0f2429fe723e32656e1661ebbd
+    home: https://github.com/webdevops/azure-loganalytics-exporter
+    keywords:
+    - azure-loganalytics-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-loganalytics-exporter
+    sources:
+    - https://github.com/webdevops/azure-loganalytics-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-loganalytics-exporter-1.0.8/azure-loganalytics-exporter-1.0.8.tgz
+    version: 1.0.8
+  - apiVersion: v2
     appVersion: 23.6.0
     created: "2023-12-22T18:19:58.629253902Z"
     description: A Helm chart for azure-loganalytics-exporter
@@ -1637,4 +1655,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2024-09-15T14:16:26.781579616Z"
+generated: "2024-09-15T14:18:43.281751985Z"
