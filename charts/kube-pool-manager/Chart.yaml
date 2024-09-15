@@ -3,9 +3,9 @@ name: kube-pool-manager
 type: application
 description: A Helm chart for kube-pool-manager
 home: https://github.com/webdevops/kube-pool-manager
-version: 1.0.12
+version: 1.0.14
 # renovate: image=webdevops/kube-pool-manager
-appVersion: 23.6.0
+appVersion: 24.9.0
 keywords:
   - kube-pool-manager
 maintainers:
