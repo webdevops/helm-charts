@@ -10,6 +10,7 @@ image:
   registry: docker.io
   repository: webdevops/azure-janitor
   tag: ""
+  sha: ""
   pullPolicy: IfNotPresent
 
 replicas: 1

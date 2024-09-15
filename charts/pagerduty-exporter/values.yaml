@@ -10,6 +10,7 @@ image:
   registry: docker.io
   repository: webdevops/pagerduty-exporter
   tag: ""
+  sha: ""
   pullPolicy: IfNotPresent
 
 replicas: 1

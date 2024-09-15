@@ -10,6 +10,7 @@ image:
   registry: docker.io
   repository: webdevops/kube-pool-manager
   tag: ""
+  sha: ""
   pullPolicy: IfNotPresent
 
 replicas: 2

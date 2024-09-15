@@ -66,10 +66,9 @@ app.kubernetes.io/name: {{ template "azure-loganalytics-exporter.name" . }}
 The image to use
 */}}
 {{- define "azure-loganalytics-exporter.image" -}}
-{{- if .Values.image.registry -}}
-{{- $imageQualifier := (printf "%s/%s" .Values.image.registry .Values.image.repository) -}}
-{{- else -}}
 {{- $imageQualifier := .Values.image.repository -}}
+{{- if .Values.image.registry -}}
+{{- $imageQualifier = (printf "%s/%s" .Values.image.registry .Values.image.repository) -}}
 {{- end }}
 {{- if .Values.image.sha -}}
 {{- printf "%s:%s@%s" $imageQualifier (default (printf "%s" .Chart.AppVersion) .Values.image.tag) .Values.image.sha }}

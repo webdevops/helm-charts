@@ -10,6 +10,7 @@ image:
   registry: docker.io
   repository: webdevops/azure-scheduledevents-manager
   tag: ""
+  sha: ""
   tagFlavor: "-kubernetes"
   pullPolicy: IfNotPresent
 
