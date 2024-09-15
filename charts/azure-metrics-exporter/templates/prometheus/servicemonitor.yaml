@@ -16,6 +16,13 @@ metadata:
 spec:
   jobLabel: {{ default "app.kubernetes.io/name" .Values.prometheus.monitor.jobLabel }}
   {{ include "servicemonitor.scrapeLimits" .Values.prometheus.monitor | indent 2 }}
+  {{- if .Values.prometheus.monitor.namespaceSelector }}
+  namespaceSelector: {{ toYaml .Values.prometheus.monitor.namespaceSelector | nindent 4 }}
+  {{- else }}
+  namespaceSelector:
+    matchNames:
+    - {{ template "azure-metrics-exporter.namespace" . }}
+  {{- end }}
   selector:
     matchLabels: {{- include "azure-metrics-exporter.selectorLabels" . | nindent 6 }}
   endpoints:
