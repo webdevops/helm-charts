@@ -1620,6 +1620,24 @@ entries:
     version: 1.0.2
   pagerduty-exporter:
   - apiVersion: v2
+    appVersion: 24.9.0
+    created: "2024-09-15T14:22:54.062143736Z"
+    description: A Helm chart for pagerduty-exporter
+    digest: f009a567e75dcb04e4b2e901c176210aa0d7d47b0bb779538f6c04b969300e4b
+    home: https://github.com/webdevops/pagerduty-exporter
+    keywords:
+    - pagerduty-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: pagerduty-exporter
+    sources:
+    - https://github.com/webdevops/pagerduty-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.1.4/pagerduty-exporter-1.1.4.tgz
+    version: 1.1.4
+  - apiVersion: v2
     appVersion: 22.12.0
     created: "2023-10-23T19:09:54.745685649Z"
     description: A Helm chart for pagerduty-exporter
@@ -1745,4 +1763,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2024-09-15T14:22:23.487177312Z"
+generated: "2024-09-15T14:22:54.062399459Z"
