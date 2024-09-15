@@ -29,8 +29,7 @@ spec:
       bearerTokenFile: {{ . }}
     {{- end }}
     {{- with .Values.prometheus.monitor.tlsConfig }}
-      tlsConfig:
-        {{- toYaml . | nindent 8 }}
+      tlsConfig: {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with .Values.prometheus.monitor.proxyUrl }}
       proxyUrl: {{ . }}
@@ -42,12 +41,10 @@ spec:
       scrapeTimeout: {{ . }}
     {{- end }}
     {{- with .Values.prometheus.monitor.relabelings }}
-      relabelings:
-        {{- toYaml . | nindent 8 }}
+      relabelings: {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with .Values.prometheus.monitor.metricRelabelings }}
-      metricRelabelings:
-        {{- toYaml . | nindent 8 }}
+      metricRelabelings: {{- toYaml . | nindent 8 }}
     {{- end }}
 {{- range $moduleName, $moduleOptions := .Values.prometheus.additionalMonitors }}
   {{- if $moduleOptions.enabled }}
@@ -56,14 +53,12 @@ spec:
       path: {{ $moduleOptions.path }}
     {{- if $moduleOptions.tplConfig }}
       {{- if eq (typeOf $moduleOptions.params) "string" }}
-      params:
-        {{ tpl ($moduleOptions.params) $ | nindent 8 }}
+      params: {{ tpl ($moduleOptions.params) $ | nindent 8 }}
       {{- else }}
-      params:
-        {{ tpl (toYaml $moduleOptions.params) $ | nindent 8 }}
+      params: {{ tpl (toYaml $moduleOptions.params) $ | nindent 8 }}
       {{- end }}
     {{- else if $moduleOptions.params }}
-        {{ toYaml $moduleOptions.params | nindent 8 }}
+      params: {{ toYaml $moduleOptions.params | nindent 8 }}
     {{- end }}
     {{- with $.Values.prometheus.monitor.basicAuth }}
       basicAuth: {{- toYaml . | nindent 8 }}
@@ -72,8 +67,7 @@ spec:
       bearerTokenFile: {{ . }}
     {{- end }}
     {{- with $.Values.prometheus.monitor.tlsConfig }}
-      tlsConfig:
-        {{- toYaml . | nindent 8 }}
+      tlsConfig: {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with $.Values.prometheus.monitor.proxyUrl }}
       proxyUrl: {{ . }}
@@ -89,12 +83,10 @@ spec:
       scrapeTimeout: {{ $.Values.prometheus.monitor.scrapeTimeout }}
     {{- end }}
     {{- with $moduleOptions.relabelings }}
-      relabelings:
-        {{- . | nindent 8 }}
+      relabelings: {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with $moduleOptions.metricRelabelings }}
-      metricRelabelings:
-        {{- . | nindent 8 }}
+      metricRelabelings: {{- toYaml . | nindent 8 }}
     {{- end }}
   {{- end }}
 {{- end }}
