@@ -67,10 +67,15 @@ app.kubernetes.io/name: {{ template "azure-metrics-exporter.name" . }}
 The image to use
 */}}
 {{- define "azure-metrics-exporter.image" -}}
-{{- if .Values.image.sha -}}
-{{- printf "%s/%s:%s@%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag) .Values.image.sha }}
+{{- if .Values.image.registry -}}
+{{- $imageQualifier := (printf "%s/%s" .Values.image.registry .Values.image.repository) -}}
 {{- else -}}
-{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag) }}
+{{- $imageQualifier := .Values.image.repository -}}
+{{- end }}
+{{- if .Values.image.sha -}}
+{{- printf "%s:%s@%s" $imageQualifier (default (printf "%s" .Chart.AppVersion) .Values.image.tag) .Values.image.sha }}
+{{- else -}}
+{{- printf "%s:%s" $imageQualifier (default (printf "%s" .Chart.AppVersion) .Values.image.tag) }}
 {{- end }}
 {{- end }}
 
