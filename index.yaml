@@ -3,6 +3,24 @@ entries:
   azure-janitor:
   - apiVersion: v2
     appVersion: 24.9.0
+    created: "2024-09-15T15:30:00.144605831Z"
+    description: A Helm chart for azure-janitor
+    digest: a18fd2d010bedef86cb91793ec7c67ab2009058c3fa7af31ef7ca4bbe3fb2115
+    home: https://github.com/webdevops/azure-janitor
+    keywords:
+    - azure-janitor
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-janitor
+    sources:
+    - https://github.com/webdevops/azure-janitor/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-janitor-1.0.11/azure-janitor-1.0.11.tgz
+    version: 1.0.11
+  - apiVersion: v2
+    appVersion: 24.9.0
     created: "2024-09-15T14:16:26.629216702Z"
     description: A Helm chart for azure-janitor
     digest: 5d88fd702b518b4f90684ddf23e766abc999c6cbd667401e08cde2b05d2e6f93
@@ -202,6 +220,24 @@ entries:
   azure-keyvault-exporter:
   - apiVersion: v2
     appVersion: 24.9.1
+    created: "2024-09-15T15:30:00.255045506Z"
+    description: A Helm chart for azure-keyvault-exporter
+    digest: 2dbb7c79ac657902088c9f9426c7f9019e0fceaa25c6ec3f8eb47cf4b64e6a71
+    home: https://github.com/webdevops/azure-keyvault-exporter
+    keywords:
+    - azure-keyvault-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-keyvault-exporter
+    sources:
+    - https://github.com/webdevops/azure-keyvault-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-keyvault-exporter-1.0.10/azure-keyvault-exporter-1.0.10.tgz
+    version: 1.0.10
+  - apiVersion: v2
+    appVersion: 24.9.1
     created: "2024-09-15T14:16:26.781401521Z"
     description: A Helm chart for azure-keyvault-exporter
     digest: 85eed5225ce50a22963a5f2fb2fc240ed8633b65790affbfc8e9f373b31555e8
@@ -383,6 +419,24 @@ entries:
   azure-loganalytics-exporter:
   - apiVersion: v2
     appVersion: 24.9.0
+    created: "2024-09-15T15:30:00.369098392Z"
+    description: A Helm chart for azure-loganalytics-exporter
+    digest: d833d2d1f94edec0379dfd8267cb9167a9b6d2c8f4fa81dae5cf666e23a76689
+    home: https://github.com/webdevops/azure-loganalytics-exporter
+    keywords:
+    - azure-loganalytics-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-loganalytics-exporter
+    sources:
+    - https://github.com/webdevops/azure-loganalytics-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-loganalytics-exporter-1.0.9/azure-loganalytics-exporter-1.0.9.tgz
+    version: 1.0.9
+  - apiVersion: v2
+    appVersion: 24.9.0
     created: "2024-09-15T14:18:43.281532283Z"
     description: A Helm chart for azure-loganalytics-exporter
     digest: a5f4aeeec1619e86f451450c7fa680c694a0eb0f2429fe723e32656e1661ebbd
@@ -544,6 +598,24 @@ entries:
     - https://github.com/webdevops/helm-charts/releases/download/azure-loganalytics-exporter-1.0.0/azure-loganalytics-exporter-1.0.0.tgz
     version: 1.0.0
   azure-metrics-exporter:
+  - apiVersion: v2
+    appVersion: 24.9.0
+    created: "2024-09-15T15:30:00.489599975Z"
+    description: A Helm chart for azure-metrics-exporter
+    digest: 64bb79c6351a5c78a9344d4d946317919cf62b7f66c9c04c11d8037a6af207e3
+    home: https://github.com/webdevops/azure-metrics-exporter
+    keywords:
+    - azure-metrics-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-metrics-exporter
+    sources:
+    - https://github.com/webdevops/azure-metrics-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-metrics-exporter-1.2.3/azure-metrics-exporter-1.2.3.tgz
+    version: 1.2.3
   - apiVersion: v2
     appVersion: 24.9.0
     created: "2024-09-15T14:19:12.685874594Z"
@@ -817,6 +889,24 @@ entries:
   azure-resourcegraph-exporter:
   - apiVersion: v2
     appVersion: 24.9.0
+    created: "2024-09-15T15:30:00.609023329Z"
+    description: A Helm chart for azure-resourcegraph-exporter
+    digest: 291c30a7b08a6db79ca931820e90accffff185c213dc2781e29a8568c7d455a4
+    home: https://github.com/webdevops/azure-resourcegraph-exporter
+    keywords:
+    - azure-resourcegraph-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-resourcegraph-exporter
+    sources:
+    - https://github.com/webdevops/azure-resourcegraph-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-resourcegraph-exporter-1.1.2/azure-resourcegraph-exporter-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: 24.9.0
     created: "2024-09-15T14:19:35.753890353Z"
     description: A Helm chart for azure-resourcegraph-exporter
     digest: 9e2c098ddb06173803e34a7d6bdfbfbf52ed2c0fcbde691716412636e7b862c1
@@ -942,6 +1032,24 @@ entries:
     - https://github.com/webdevops/helm-charts/releases/download/azure-resourcegraph-exporter-1.0.0/azure-resourcegraph-exporter-1.0.0.tgz
     version: 1.0.0
   azure-resourcemanager-exporter:
+  - apiVersion: v2
+    appVersion: 24.9.0
+    created: "2024-09-15T15:30:00.736299808Z"
+    description: A Helm chart for azure-resourcemanager-exporter
+    digest: 867f8f3e50c3d0be28cc84abedf62b394a756cfc47f1525715ebd5199a49e22f
+    home: https://github.com/webdevops/azure-resourcemanager-exporter
+    keywords:
+    - azure-resourcemanager-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-resourcemanager-exporter
+    sources:
+    - https://github.com/webdevops/azure-resourcemanager-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-resourcemanager-exporter-1.3.3/azure-resourcemanager-exporter-1.3.3.tgz
+    version: 1.3.3
   - apiVersion: v2
     appVersion: 24.9.0
     created: "2024-09-15T15:05:27.179092526Z"
@@ -1177,6 +1285,24 @@ entries:
     - https://github.com/webdevops/helm-charts/releases/download/azure-resourcemanager-exporter-1.0.0/azure-resourcemanager-exporter-1.0.0.tgz
     version: 1.0.0
   azure-scheduledevents-manager:
+  - apiVersion: v2
+    appVersion: 24.9.0
+    created: "2024-09-15T15:30:00.852384824Z"
+    description: A Helm chart for azure-scheduledevents-manager
+    digest: 603cd1c1d602d4f560b2c8146fb439ba2f4b7099afc1d7d1ee6d8b506270eb84
+    home: https://github.com/webdevops/azure-scheduledevents-manager
+    keywords:
+    - azure-scheduledevents-manager
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-scheduledevents-manager
+    sources:
+    - https://github.com/webdevops/azure-scheduledevents-manager/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-scheduledevents-manager-1.0.15/azure-scheduledevents-manager-1.0.15.tgz
+    version: 1.0.15
   - apiVersion: v2
     appVersion: 24.9.0
     created: "2024-09-15T14:22:00.676783347Z"
@@ -1422,6 +1548,24 @@ entries:
   kube-pool-manager:
   - apiVersion: v2
     appVersion: 24.9.0
+    created: "2024-09-15T15:30:00.972798615Z"
+    description: A Helm chart for kube-pool-manager
+    digest: c8c5b4d65c99b0c6a290272dbeb933b0c46eae47edd640a28975e879100c20c7
+    home: https://github.com/webdevops/kube-pool-manager
+    keywords:
+    - kube-pool-manager
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: kube-pool-manager
+    sources:
+    - https://github.com/webdevops/kube-pool-manager/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/kube-pool-manager-1.0.14/kube-pool-manager-1.0.14.tgz
+    version: 1.0.14
+  - apiVersion: v2
+    appVersion: 24.9.0
     created: "2024-09-15T14:22:23.487009377Z"
     description: A Helm chart for kube-pool-manager
     digest: 6723bb55ec1e0b1e7500f3e1599bd43221a05917804eb8c19462ce0a38e5b443
@@ -1639,6 +1783,24 @@ entries:
   pagerduty-exporter:
   - apiVersion: v2
     appVersion: 24.9.0
+    created: "2024-09-15T15:30:01.132150374Z"
+    description: A Helm chart for pagerduty-exporter
+    digest: 35591a64f42f1e7dfeec6d2ae6de3c69d0cc0724513c626075d011eb6a81a17f
+    home: https://github.com/webdevops/pagerduty-exporter
+    keywords:
+    - pagerduty-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: pagerduty-exporter
+    sources:
+    - https://github.com/webdevops/pagerduty-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.1.5/pagerduty-exporter-1.1.5.tgz
+    version: 1.1.5
+  - apiVersion: v2
+    appVersion: 24.9.0
     created: "2024-09-15T14:22:54.062143736Z"
     description: A Helm chart for pagerduty-exporter
     digest: f009a567e75dcb04e4b2e901c176210aa0d7d47b0bb779538f6c04b969300e4b
@@ -1781,4 +1943,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2024-09-15T15:05:27.179372891Z"
+generated: "2024-09-15T15:30:01.132601587Z"
