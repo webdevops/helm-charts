@@ -20,13 +20,13 @@ spec:
   {{ include "servicemonitor.scrapeLimits" $monitorDefaults | indent 2 }}
   selector:
     matchLabels: {{- include "azure-metrics-exporter.selectorLabels" $root | nindent 6 }}
-  {{- if .Values.prometheus.monitor.namespaceSelector }}
-  namespaceSelector: {{ toYaml .Values.prometheus.monitor.namespaceSelector | nindent 4 }}
+  {{- if $root.Values.prometheus.monitor.namespaceSelector }}
+  namespaceSelector: {{ toYaml $root.Values.prometheus.monitor.namespaceSelector | nindent 4 }}
   {{- else }}
   namespaceSelector:
     matchNames:
       - {{ template "azure-metrics-exporter.namespace" . }}
-  {{- end }} 
+  {{- end }}
   endpoints:
     - port: {{ $root.Values.service.portName }}
       scheme: {{ (default $monitorDefaults.scheme .scheme) }}
