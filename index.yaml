@@ -654,6 +654,24 @@ entries:
   azure-metrics-exporter:
   - apiVersion: v2
     appVersion: 24.9.1
+    created: "2024-10-31T16:24:35.241530576Z"
+    description: A Helm chart for azure-metrics-exporter
+    digest: 1daaff3b62823a43390352e2d14d4fbc1c7cdbb141f96f6eb3bec41d149c5460
+    home: https://github.com/webdevops/azure-metrics-exporter
+    keywords:
+    - azure-metrics-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-metrics-exporter
+    sources:
+    - https://github.com/webdevops/azure-metrics-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-metrics-exporter-1.2.8/azure-metrics-exporter-1.2.8.tgz
+    version: 1.2.8
+  - apiVersion: v2
+    appVersion: 24.9.1
     created: "2024-09-15T19:45:19.341915154Z"
     description: A Helm chart for azure-metrics-exporter
     digest: 67365d47d30f4ade3c6766d93d71f57a9c5aa07783db7619cb118a90c623874a
@@ -995,6 +1013,24 @@ entries:
     - https://github.com/webdevops/helm-charts/releases/download/azure-metrics-exporter-1.0.0/azure-metrics-exporter-1.0.0.tgz
     version: 1.0.0
   azure-resourcegraph-exporter:
+  - apiVersion: v2
+    appVersion: 24.9.0
+    created: "2024-10-31T16:24:35.425789521Z"
+    description: A Helm chart for azure-resourcegraph-exporter
+    digest: 272cbdf83d8285c413b56ad317c22ba7d77dadc22d0e4bb13fd5b5a017f267a0
+    home: https://github.com/webdevops/azure-resourcegraph-exporter
+    keywords:
+    - azure-resourcegraph-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-resourcegraph-exporter
+    sources:
+    - https://github.com/webdevops/azure-resourcegraph-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-resourcegraph-exporter-1.1.4/azure-resourcegraph-exporter-1.1.4.tgz
+    version: 1.1.4
   - apiVersion: v2
     appVersion: 24.9.0
     created: "2024-09-15T19:45:19.473361772Z"
@@ -2141,4 +2177,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2024-09-15T19:45:19.867074552Z"
+generated: "2024-10-31T16:24:35.426174228Z"
