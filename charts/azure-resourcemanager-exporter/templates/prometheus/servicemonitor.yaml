@@ -5,7 +5,7 @@ kind: ServiceMonitor
 metadata:
   name: {{ template "azure-resourcemanager-exporter.fullname" . }}
   namespace: {{ template "azure-resourcemanager-exporter.namespace" . }}
-  labels: {{ include "azure-resourcemanager-exporter.labels" . | indent 4 }}
+  labels: {{ include "azure-resourcemanager-exporter.labels" . | nindent 4 }}
 spec:
   jobLabel: {{ default "app.kubernetes.io/name" .Values.prometheus.monitor.jobLabel }}
   {{ include "servicemonitor.scrapeLimits" .Values.prometheus.monitor | indent 2 }}
