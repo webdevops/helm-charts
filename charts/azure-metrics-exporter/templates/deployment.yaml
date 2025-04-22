@@ -40,6 +40,7 @@ spec:
 
       securityContext: {{ toYaml .Values.securityContext | nindent 8 }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      automountServiceAccountToken: {{ .Values.automountServiceAccountToken }}
 
       containers:
         #######################
