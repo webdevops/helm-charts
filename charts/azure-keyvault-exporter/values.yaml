@@ -16,6 +16,7 @@ image:
 replicas: 1
 minReadySeconds: 10
 terminationGracePeriodSeconds: 60
+automountServiceAccountToken: true
 
 env: {}
   # DEBUG: "true"
@@ -76,6 +77,7 @@ serviceAccount:
   name: azure-keyvault-exporter
   labels: {}
   annotations: {}
+  automountServiceAccountToken: true
 
 ## Customize the strategy if set
 strategy: {}

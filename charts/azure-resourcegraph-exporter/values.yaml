@@ -28,6 +28,7 @@ image:
 
 minReadySeconds: 10
 terminationGracePeriodSeconds: 60
+automountServiceAccountToken: true
 
 # -- define env
 env:

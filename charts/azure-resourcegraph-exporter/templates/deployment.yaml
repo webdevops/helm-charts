@@ -42,6 +42,7 @@ spec:
       {{- end }}
     spec:
       serviceAccountName: {{ template "azure-resourcegraph-exporter.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.automountServiceAccountToken }}
       {{- with .Values.priorityClassName }}
       priorityClassName: {{ . | quote }}
       {{- end }}
