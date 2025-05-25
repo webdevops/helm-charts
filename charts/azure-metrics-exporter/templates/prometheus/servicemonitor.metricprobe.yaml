@@ -25,7 +25,7 @@ spec:
   {{- else }}
   namespaceSelector:
     matchNames:
-      - {{ template "azure-metrics-exporter.namespace" . }}
+      - {{ template "azure-metrics-exporter.namespace" $root }}
   {{- end }}
   endpoints:
     - port: {{ $root.Values.service.portName }}
