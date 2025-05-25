@@ -672,6 +672,24 @@ entries:
   azure-metrics-exporter:
   - apiVersion: v2
     appVersion: 24.9.1
+    created: "2025-05-25T14:15:07.049002832Z"
+    description: A Helm chart for azure-metrics-exporter
+    digest: 6150661fb025d6ab3f5aa5d89c8d89eb08836138b92f3291197650e0df324812
+    home: https://github.com/webdevops/azure-metrics-exporter
+    keywords:
+    - azure-metrics-exporter
+    maintainers:
+    - email: mblaschke82@gmail.com
+      name: mblaschke
+    name: azure-metrics-exporter
+    sources:
+    - https://github.com/webdevops/azure-metrics-exporter/
+    type: application
+    urls:
+    - https://github.com/webdevops/helm-charts/releases/download/azure-metrics-exporter-1.2.9/azure-metrics-exporter-1.2.9.tgz
+    version: 1.2.9
+  - apiVersion: v2
+    appVersion: 24.9.1
     created: "2024-10-31T16:24:35.241530576Z"
     description: A Helm chart for azure-metrics-exporter
     digest: 1daaff3b62823a43390352e2d14d4fbc1c7cdbb141f96f6eb3bec41d149c5460
@@ -2195,4 +2213,4 @@ entries:
     urls:
     - https://github.com/webdevops/helm-charts/releases/download/pagerduty-exporter-1.0.1/pagerduty-exporter-1.0.1.tgz
     version: 1.0.1
-generated: "2025-05-22T08:12:35.888415498Z"
+generated: "2025-05-25T14:15:07.049760584Z"
