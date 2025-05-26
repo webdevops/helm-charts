@@ -30,7 +30,7 @@ A Helm chart for azure-resourcegraph-exporter
 | extraVolumeMounts | list | `[]` |  |
 | extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` | String to fully override azure-resourcegraph-exporter.fullname template |
-| global.imagePullSecrets | list | `[]` | registry secret names as an array |
+| imagePullSecrets | list | `[]` | registry secret names as an array |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` | image registry |
 | image.repository | string | `"webdevops/azure-resourcegraph-exporter"` | image repository |

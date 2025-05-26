@@ -1,8 +1,4 @@
 ---
-global:
-  # -- registry secret names as an array
-  imagePullSecrets: []
-
 # -- String to partially override azure-loganalytics-exporter.fullname template (will maintain the release name)
 nameOverride: ''
 
@@ -143,6 +139,10 @@ containerSecurityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop: ["ALL"]
+
+# -- registry secret names as an array
+imagePullSecrets: []
+  # - name: pull-secret-name
 
 service:
   type: ClusterIP
