@@ -3,7 +3,7 @@ name: azure-loganalytics-exporter
 type: application
 description: A Helm chart for azure-loganalytics-exporter
 home: https://github.com/webdevops/azure-loganalytics-exporter
-version: 1.0.11
+version: 1.0.12
 # renovate: image=webdevops/azure-loganalytics-exporter
 appVersion: 25.5.0
 keywords:
