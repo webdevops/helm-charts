@@ -103,6 +103,7 @@ containerSecurityContext:
 
 # -- registry secret names as an array
 imagePullSecrets: []
+  # - name: pull-secret-name
 
 service:
   type: ClusterIP
@@ -175,6 +176,3 @@ prometheus:
     ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
     ##
     labelValueLengthLimit: 0
-
-global:
-  imagePullSecrets: []
