@@ -5,7 +5,11 @@ kind: Deployment
 metadata:
   name: {{ template "azure-metrics-exporter.fullname" . }}
   namespace: {{ template "azure-metrics-exporter.namespace" . }}
-  labels: {{ include "azure-metrics-exporter.labels" . | nindent 4 }}
+  labels:
+    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
+    {{- with .Values.deploymentLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   {{- with .Values.replicas }}
   replicas: {{ . }}
