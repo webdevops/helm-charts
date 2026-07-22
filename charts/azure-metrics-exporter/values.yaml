@@ -82,6 +82,7 @@ strategy: {}
 
 podLabels: {}
 podAnnotations: {}
+deploymentLabels: {}
 
 securityContext:
   runAsUser: 1000
